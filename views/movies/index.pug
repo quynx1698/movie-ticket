@@ -1,4 +1,9 @@
 h1 Movies
+
+form(action="/movies/search", method="GET")
+    input(type="text", name="q")
+    button Search
+
 ul
     each movie in movies
         li= movie.name

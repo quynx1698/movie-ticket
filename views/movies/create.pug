@@ -1,0 +1,10 @@
+h1 Create movie
+
+form(action="/movies/create", method="POST")
+    label(for="name") Name
+    input(type="text", name="name")
+
+    label(for="genre") Genre
+    input(type="text", name="genre")
+
+    button Create

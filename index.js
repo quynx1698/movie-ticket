@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 let movies = [
   { id: 1, name: "Spider man" },
-  { id: 2, name: "Hulk" }
+  { id: 2, name: "Iron man" },
+  { id: 3, name: "Hulk" }
 ];
 
 app.get("/", (req, res) => res.render("index"));

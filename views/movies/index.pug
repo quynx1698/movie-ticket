@@ -8,4 +8,7 @@ form(action="/movies/search", method="GET")
 
 ul
     each movie in movies
-        li= movie.name
+        li
+            span= movie.name
+            span &nbsp
+            a(href="/movies/" + movie.id) View

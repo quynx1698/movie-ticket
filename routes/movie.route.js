@@ -1,48 +1,16 @@
 var express = require("express");
 var router = express.Router();
-const shortid = require("shortid");
-const db = require("../db");
 
-router.get("/", (req, res) =>
-  res.render("movies/index", {
-    movies: db.get("movies").value()
-  })
-);
+const controller = require("../controllers/movie.controller");
 
-router.get("/search", (req, res) => {
-  let q = req.query.q;
-  let matchedMovies = movies.filter(
-    user => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
-  );
+router.get("/", controller.index);
 
-  res.render("movies/index", {
-    movies: matchedMovies
-  });
-});
+router.get("/search", controller.search);
 
-router.get("/create", (req, res) => {
-  res.render("movies/create");
-});
+router.get("/create", controller.create);
 
-router.post("/create", (req, res) => {
-  req.body.id = shortid.generate();
-  db.get("movies")
-    .push(req.body)
-    .write();
-  res.redirect("/movies");
-});
+router.post("/create", controller.postCreate);
 
-router.get("/:id", (req, res) => {
-  let id = req.params.id;
-
-  var movie = db
-    .get("movies")
-    .find({ id: id })
-    .value();
-
-  res.render("movies/view", {
-    movie: movie
-  });
-});
+router.get("/:id", controller.get);
 
 module.exports = router;

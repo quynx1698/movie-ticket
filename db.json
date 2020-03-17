@@ -1,24 +1,58 @@
 {
   "movies": [
     {
-      "name": "Captain American",
-      "genre": "Action",
-      "id": "FqsLEY4H"
+      "name": "Bloodshot",
+      "genre": "Hành động",
+      "thumbnail": "https://galaxycine.vn/media/2020/2/3/mv5bmmu5zmqymgqtothhnc00mdjllwfjywetnjvkmzawzdljztg3xkeyxkfqcgdeqxvymtkxnjuynq--v1-sy1000-cr0-0-674-1000-al-_1580704281885.jpg",
+      "id": "bvh4Xkjt"
     },
     {
-      "name": "Iron man",
-      "genre": "Action",
-      "id": "7LHeTt0W"
+      "name": "Nắng 3: Lời Hứa Của Cha",
+      "genre": "Gia đình",
+      "thumbnail": "https://galaxycine.vn/media/2020/2/26/nang-3---poster-khong-logo_1582692152072.jpg",
+      "id": "jao0qcs1"
     },
     {
-      "name": "Spider man",
-      "genre": "Action",
-      "id": "0Ww8RX6s"
+      "name": "Truy Tìm Phép Thuật",
+      "genre": "Hoạt hình",
+      "thumbnail": "https://galaxycine.vn/media/2020/1/16/poster-onward-official_1579158439704.jpg",
+      "id": "MUs7crDL"
     },
     {
-      "name": "Hulk",
-      "genre": "Romance",
-      "id": "Uo7YyGyG"
+      "name": "Dấu Ấn Vô Cực",
+      "genre": "Kinh dị",
+      "thumbnail": "https://galaxycine.vn/media/2020/3/5/300x450_1583402323490.jpg",
+      "id": "-5Y2QulN"
+    },
+    {
+      "name": "Vì Anh Vẫn Tin",
+      "genre": "Tình cảm",
+      "thumbnail": "https://galaxycine.vn/media/2020/3/2/300x450-i-still_1583144811728.jpg",
+      "id": "Ie-vrWss"
+    },
+    {
+      "name": "Căn Hộ Của Quỷ",
+      "genre": "Kinh dị",
+      "thumbnail": "https://galaxycine.vn/media/2020/2/24/300x450-32_1582530404329.jpg",
+      "id": "FnJ8JSSv"
+    },
+    {
+      "name": "Ác Mộng Bên Hồ",
+      "genre": "Kinh dị",
+      "thumbnail": "https://galaxycine.vn/media/2020/2/27/300x450-1_1582775190404.jpg",
+      "id": "6ZkPgPS_"
+    },
+    {
+      "name": "Kẻ Vô Hình",
+      "genre": "Kinh dị",
+      "thumbnail": "https://galaxycine.vn/media/2020/2/19/300x450_1582096423455.jpg",
+      "id": "vX3vB2rg"
+    },
+    {
+      "name": "Tiếng Gọi Nơi Hoang Dã",
+      "genre": "Phiêu lưu",
+      "thumbnail": "https://galaxycine.vn/media/2020/2/13/cofw-teaser_1581586630436.jpg",
+      "id": "aFkHk4iX"
     }
   ]
 }

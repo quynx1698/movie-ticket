@@ -1,14 +1,32 @@
-h1 Movies
+extends ../layouts/common
 
-a(href="/movies/create") New
-
-form(action="/movies/search", method="GET")
-    input(type="text", name="q")
-    button Search
-
-ul
-    each movie in movies
-        li
-            span= movie.name
-            span &nbsp
-            a(href="/movies/" + movie.id) View
+block content
+    section.position-relative
+        #particles-js
+            canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+        .container
+            .row.text-center
+                .col
+                    h1 Phim đang chiếu
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                            li.breadcrumb-item
+                                a.text-dark(href='#') Trang chủ
+                            li.breadcrumb-item Phim
+                            li.breadcrumb-item.active.text-primary Phim đang chiếu
+    section.page-content
+        .container
+            .row
+                .col-md-12.col-lg-9.order-lg-1
+                    .row.row-cols-md-2.row-cols-lg-3
+                        each movie in movies
+                            .col.mb-5
+                                .movie-item
+                                    .movie-img.hover-translate
+                                        a(href='#')
+                                            img.img-fluid.rounded(src=movie.thumbnail alt='nang 3')
+                                    .movie-desc
+                                        a.movie-name.mt-4.mb-2.d-block.link-title(href='#')= movie.name
+                                        p.movie-genre.text-muted= movie.genre
+                .col-md-12.col-lg-3
+                    a(href="/movies/create") Thêm phim

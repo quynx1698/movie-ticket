@@ -54,5 +54,17 @@
       "thumbnail": "https://galaxycine.vn/media/2020/2/13/cofw-teaser_1581586630436.jpg",
       "id": "aFkHk4iX"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "xq@gmail.com",
+      "password": "7895123"
+    },
+    {
+      "id": 2,
+      "email": "xq2@gmail.com",
+      "password": "7895123"
+    }
   ]
 }

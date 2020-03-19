@@ -1,0 +1,14 @@
+h1 Login
+
+if errors
+    each error in errors
+        .alert= error
+
+form(method="POST")
+    label(for="email") Tài khoản
+    input(type="text", name="email", value=values ? values.email : "")
+
+    label(for="password") Mật khẩu
+    input(type="text", name="password", value=values ? values.password : "")
+
+    button Login

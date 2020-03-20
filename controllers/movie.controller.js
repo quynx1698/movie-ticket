@@ -1,10 +1,38 @@
 const db = require("../db");
 const shortid = require("shortid");
 
-module.exports.index = (req, res) =>
+module.exports.index = (req, res) => {
+  let page = parseInt(req.query.page) || 1;
+  const perPage = 6;
+
+  let start = (page - 1) * perPage;
+  let end = page * perPage;
+
+  let data = db.get("movies").value();
+  let lastPage = Math.ceil(data.length / perPage);
+
+  let pages = [];
+  if (lastPage < 6) {
+    for (let i = 1; i <= lastPage; i++) {
+      pages.push(i);
+    }
+  } else {
+    for (
+      let i = page >= --lastPage ? lastPage - 4 : page - 2;
+      i <= (page >= --lastPage) ? lastPage : page + 2;
+      i++
+    ) {
+      pages.push(i);
+    }
+  }
+
   res.render("movies/index", {
-    movies: db.get("movies").value()
+    movies: data.slice(start, end),
+    current: page,
+    lastPage: lastPage,
+    pages: pages
   });
+};
 
 module.exports.search = (req, res) => {
   let q = req.query.q;

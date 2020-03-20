@@ -28,5 +28,22 @@ block content
                                     .movie-desc
                                         a.movie-name.mt-4.mb-2.d-block.link-title(href='#')= movie.name
                                         p.movie-genre.text-muted= movie.genre
+                    nav.mt-5
+                        ul.pagination.justify-content-end
+                            if current > 1
+                                li.page-item.mr-2
+                                    a.page-link.rounded-circle.text-dark.bg-transparent(href='/movies?page=' + (current - 1))
+                                        i.fa.fa-chevron-left
+                            each page in pages
+                                if current == page
+                                    li.page-item.px-2.active
+                                        a.page-link.border-0.rounded-circle(href='/movies?page=' + page)= page
+                                else
+                                    li.page-item.px-2
+                                        a.page-link.border-0.rounded-circle.text-dark(href='/movies?page=' + page)= page
+                            if current < lastPage
+                                li.page-item.ml-2
+                                    a.page-link.rounded-circle.text-dark.bg-transparent(href='/movies?page=' + (current + 1))
+                                        i.fa.fa-chevron-right
                 .col-md-12.col-lg-3
                     a(href="/movies/create") Thêm phim

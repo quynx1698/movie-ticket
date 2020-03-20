@@ -98,6 +98,14 @@ header .navbar-nav .nav-item {
   left: 0;
 }
 
+.page-item a.page-link:hover {
+  background-color: #c1e7ff;
+}
+
+.page-item.active .page-link:hover {
+  background-color: #007bff;
+}
+
 @media (max-width: 991.98px) {
   .navbar {
     justify-content: flex-end;

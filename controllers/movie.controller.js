@@ -1,6 +1,14 @@
 const db = require("../db");
 const shortid = require("shortid");
 
+function pageList(page) {
+  let pages = [];
+  for (let i = page - 2; i <= page + 2; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
 module.exports.index = (req, res) => {
   let page = parseInt(req.query.page) || 1;
   const perPage = 6;
@@ -17,12 +25,12 @@ module.exports.index = (req, res) => {
       pages.push(i);
     }
   } else {
-    for (
-      let i = page >= --lastPage ? lastPage - 4 : page - 2;
-      i <= (page >= --lastPage) ? lastPage : page + 2;
-      i++
-    ) {
-      pages.push(i);
+    if (page < 3) {
+      pages = pageList(3);
+    } else if (page > lastPage - 2) {
+      pages = pageList(lastPage - 2);
+    } else {
+      pages = pageList(page);
     }
   }
 

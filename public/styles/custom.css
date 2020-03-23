@@ -98,6 +98,19 @@ header .navbar-nav .nav-item {
   left: 0;
 }
 
+.page-link {
+  padding: 0;
+}
+
+.page-item a.page-link {
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  line-height: 28px;
+  text-align: center;
+  font-size: 12px;
+}
+
 .page-item a.page-link:hover {
   background-color: #c1e7ff;
 }

@@ -23,10 +23,10 @@ block content
                             .col.mb-5
                                 .movie-item
                                     .movie-img.hover-translate
-                                        a(href='#')
-                                            img.img-fluid.rounded(src=movie.thumbnail alt='nang 3')
+                                        a(href='/movies/view/' + movie.id)
+                                            img.img-fluid.rounded(src=movie.thumbnail alt=movie.name)
                                     .movie-desc
-                                        a.movie-name.mt-4.mb-2.d-block.link-title(href='#')= movie.name
+                                        a.movie-name.mt-4.mb-2.d-block.link-title(href='/movies/' + movie.id)= movie.name
                                         p.movie-genre.text-muted= movie.genre
                     nav
                         ul.pagination.justify-content-end

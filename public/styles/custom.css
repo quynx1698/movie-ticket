@@ -18,8 +18,25 @@ a:hover {
   text-decoration: none;
 }
 
+p {
+  color: #8090b5;
+  line-height: 1.7;
+}
+
 section {
   padding: 5rem 0;
+}
+
+tr {
+  display: block;
+  float: left;
+}
+
+th,
+td,
+thead,
+tbody {
+  display: block;
 }
 
 .navbar-brand {
@@ -117,6 +134,35 @@ header .navbar-nav .nav-item {
 
 .page-item.active .page-link:hover {
   background-color: #007bff;
+}
+
+.table td,
+.table th {
+  padding: 0.5rem 1.75rem;
+  padding-left: 0;
+}
+
+.text-warning {
+  color: #fe7900 !important;
+}
+
+.bg-warning {
+  background-color: #fe7900 !important;
+}
+
+.nav-tabs .nav-item.nav-link {
+  padding: 1.5rem 2rem;
+  font-size: 1.2rem;
+  color: #1d1d33;
+  margin: 0 5px;
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 55px 5px rgba(137, 173, 255, 0.15) !important;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover {
+  background: #1360ef;
+  color: #ffffff;
 }
 
 @media (max-width: 991.98px) {

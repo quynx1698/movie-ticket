@@ -66,7 +66,7 @@ module.exports.postCreate = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  let id = req.params.id;
+  let id = parseInt(req.params.id);
 
   var movie = db
     .get("movies")

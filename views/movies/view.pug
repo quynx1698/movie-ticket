@@ -24,7 +24,7 @@ block content
                     .product-details
                         h4.mb-4= movie.name
                         .entry-pg
-                            span.pg.bg-warning.py-1.px-2.text-white= movie.pg
+                            span.pg.bg-warning.py-1.px-2.text-white.text-uppercase= movie.pg
                             span.text-warning
                                 i.ml-3.fa.fa-clock-o
                                 span &nbsp
@@ -32,20 +32,20 @@ block content
                         table.table.table-borderless.mt-4
                             thead
                                 tr
-                                    th Actor:
-                                    th Director:
-                                    th Genre:
-                                    th Release:
-                                    th Language:
-                                    th IMDB Rating:
-                                    th Producer:
+                                    th Diễn viên:
+                                    th Đạo diễn:
+                                    th Thể loại:
+                                    th Ngày phát hành:
+                                    th Quốc gia:
+                                    th Điểm IMDB:
+                                    th Nhà sản xuất:
                             tbody
                                 tr
                                     td= movie.actor
                                     td= movie.director
                                     td= movie.genre
                                     td= movie.release
-                                    td= movie.lang
+                                    td= movie.nation
                                     td= movie.imdb
                                     td= movie.producer
     section.desc-content

@@ -1,5 +1,4 @@
-const db = require("../db");
-const shortid = require("shortid");
+const Movie = require("../models/movie.model");
 
 function pageList(page) {
   let pages = [];
@@ -9,14 +8,14 @@ function pageList(page) {
   return pages;
 }
 
-module.exports.index = (req, res) => {
+module.exports.index = async (req, res) => {
   let page = parseInt(req.query.page) || 1;
   const perPage = 6;
 
   let start = (page - 1) * perPage;
   let end = page * perPage;
 
-  let data = db.get("movies").value();
+  let data = await Movie.find();
   let lastPage = Math.ceil(data.length / perPage);
 
   let pages = [];
@@ -58,20 +57,19 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.postCreate = (req, res) => {
-  req.body.id = shortid.generate();
-  db.get("movies")
-    .push(req.body)
-    .write();
+  // req.body.id = shortid.generate();
+  // db.get("movies")
+  //   .push(req.body)
+  //   .write();
   res.redirect("/movies");
 };
 
-module.exports.get = (req, res) => {
-  let id = parseInt(req.params.id);
+module.exports.get = async (req, res) => {
+  let id = req.params.id;
 
-  var movie = db
-    .get("movies")
-    .find({ id: id })
-    .value();
+  var movie = await Movie.findById(id);
+
+  console.log(movie.nation);
 
   res.render("movies/view", {
     movie: movie

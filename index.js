@@ -6,6 +6,10 @@ const port = 3000;
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.MONGO_URL);
+
 const movieRoutes = require("./routes/movie.route");
 const authRoutes = require("./routes/auth.route");
 

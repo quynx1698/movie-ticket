@@ -12,7 +12,8 @@ var movieSchema = new mongoose.Schema({
   imdb: Number,
   producer: String,
   description: String,
-  thumbnail: String
+  thumbnail: String,
+  showtime: Object,
 });
 
 var Movie = mongoose.model("Movie", movieSchema, "movies");

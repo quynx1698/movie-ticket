@@ -165,6 +165,84 @@ header .navbar-nav .nav-item {
   color: #ffffff;
 }
 
+.mb-6 {
+  margin-bottom: 5rem;
+}
+
+.seat {
+  display: block;
+  margin-right: 3.75rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.seat input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 50px;
+  background-color: #eee;
+  border-radius: 0.25rem 0.25rem 1.25rem 1.25rem;
+}
+
+/* On mouse-over, add a grey background color */
+.seat:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.seat input:checked ~ .checkmark {
+  background-color: #1360ef;
+}
+
+.seat input:disabled ~ .checkmark {
+  background-color: #fe7900;
+}
+
+@media (max-width: 767.98px) {
+  /* The container */
+  .seat {
+    margin-right: 1.65rem;
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+  }
+
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the indicator (dot/circle) when checked */
+  .seat input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  /* Style the indicator (dot/circle) */
+  .seat .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+}
+
 @media (max-width: 991.98px) {
   .navbar {
     justify-content: flex-end;

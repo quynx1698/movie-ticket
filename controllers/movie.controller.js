@@ -37,18 +37,18 @@ module.exports.index = async (req, res) => {
     movies: data.slice(start, end),
     current: page,
     lastPage: lastPage,
-    pages: pages
+    pages: pages,
   });
 };
 
 module.exports.search = (req, res) => {
   let q = req.query.q;
   let matchedMovies = movies.filter(
-    user => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
+    (user) => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
   );
 
   res.render("movies/index", {
-    movies: matchedMovies
+    movies: matchedMovies,
   });
 };
 
@@ -66,12 +66,39 @@ module.exports.postCreate = (req, res) => {
 
 module.exports.get = async (req, res) => {
   let id = req.params.id;
+  let movie = await Movie.findById(id);
 
-  var movie = await Movie.findById(id);
+  let showtimeDate = [];
+  let now = new Date();
+  let nowDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  console.log(movie.nation);
+  for (let day in movie.showtime) {
+    let dayArr = day.split("/");
+    let dateShow = new Date(dayArr[2], dayArr[1] - 1, dayArr[0]);
+    if (dateShow >= nowDate) showtimeDate.push(day);
+  }
+
+  let showtimeTime = {};
+  for (let i = 0; i < showtimeDate.length; i++) {
+    showtimeTime[showtimeDate[i]] = [];
+    for (let time in movie.showtime[showtimeDate[i]]) {
+      let timeArr = time.split(":");
+      if (i == 0) {
+        if (timeArr[0] > now.getHours()) {
+          showtimeTime[showtimeDate[i]].push(time);
+        }
+        if (timeArr[0] == now.getHours() && timeArr[1] >= now.getMinutes()) {
+          showtimeTime[showtimeDate[i]].push(time);
+        }
+      } else {
+        showtimeTime[showtimeDate[i]].push(time);
+      }
+    }
+  }
 
   res.render("movies/view", {
-    movie: movie
+    movie: movie,
+    showtimeDate: showtimeDate,
+    showtimeTime: showtimeTime,
   });
 };

@@ -66,36 +66,39 @@ block content
                                     .col-md-6
                                         .form-group
                                             label.text-primary(for='showtimeDate') Chọn ngày
-                                            select#showtimeDate.form-control(name='showtimeDate')
+                                            select#showtimeDate.form-control(name='showtimeDate' onchange=`changeDate(${JSON.stringify(movie)})`)
                                                 each day in showtimeDate
                                                     option(value=day)= day
                                     .col-md-6
                                         .form-group
                                             label.text-primary(for='showtimeTime') Chọn giờ
-                                            select#showtimeTime.form-control(name='showtimeTime')
+                                            select#showtimeTime.form-control(name='showtimeTime' onchange=`changeTime(${JSON.stringify(movie)})`)
                                                 each time in showtimeTime[showtimeDate[0]]
                                                     option(value=time)= time
                                 .row
                                     .col
                                         img.img-fluid(src='/images/screen.png' alt='creen')
                                         - var seatLine = ['F','E','D','C','B','A'];
-                                        each seatL in seatLine
-                                            if seatL == 'F'
-                                                h5.my-5.font-weight-normal Ghế thường
-                                            if seatL == 'D'
-                                                h5.my-5.font-weight-normal Ghế cao cấp
-                                            if seatL == 'B'
-                                                h5.my-5.font-weight-normal Ghế bạch kim
-                                            .row.justify-content-center.mb-6
-                                                - var i = 0;
-                                                each seatPos in movie.showtime[showtimeDate[0]][showtimeTime[showtimeDate[0]][0]][seatL]
-                                                    label.seat
-                                                        if seatPos
-                                                            input(type='radio' name='seat' value=seatL+i)
-                                                        else
-                                                            input(type='radio' name='seat' disabled value=seatL+i)
-                                                        span.checkmark
-                                                        - i = i + 1;
+                                        #seatPlace
+                                            each seatL in seatLine
+                                                if seatL == 'F'
+                                                    h5.my-5.font-weight-normal Ghế thường
+                                                if seatL == 'D'
+                                                    h5.my-5.font-weight-normal Ghế cao cấp
+                                                if seatL == 'B'
+                                                    h5.my-5.font-weight-normal Ghế bạch kim
+                                                .row.justify-content-center.mb-6
+                                                    - var i = 0;
+                                                    each seatPos in movie.showtime[showtimeDate[0]][showtimeTime[showtimeDate[0]][0]][seatL]
+                                                        label.seat
+                                                            if seatPos
+                                                                input(type='radio' name='seat' value=seatL+i)
+                                                            else
+                                                                input(type='radio' name='seat' disabled value=seatL+i)
+                                                            span.checkmark
+                                                            - i = i + 1;
                                 .row.justify-content-center.mt-3
                                     .col-auto
-                                        input.btn.btn-primary(type='submit' value='Mua vé')
+                                        input.btn.btn-primary(type='submit' value='Tiến hành đặt vé')
+    script(src="/js/seat.js")
+    

@@ -1,0 +1,69 @@
+extends ../layouts/common
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Thông tin phim
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Phim
+                                li.breadcrumb-item.active.text-primary Đặt vé xem phim
+    section
+        .container
+            .row
+                .col-lg-7
+                    .checkout-form
+                        h2.mb-4 Thông tin thanh toán
+                        form.row.row-cols-md-2.row-cols-1(action='/' method="POST")
+                            .col
+                                .form-group
+                                    label(for='firstname') Họ
+                                    input.form-control(type='text' name='firstname' placeholder='Nhập họ')
+                            .col
+                                .form-group
+                                    label(for='lastname') Tên
+                                    input.form-control(type='text' name='lastname' placeholder='Nhập tên')
+                            .col
+                                .form-group
+                                    label(for='phoneNum') Số điện thoại
+                                    input.form-control(type='tel' pattern='[0-9]{10}' name='phoneNum' placeholder='Nhập số điện thoại')
+                            .col
+                                .form-group
+                                    label(for='country') Quốc tịch
+                                    input.form-control(type='text' name='country' placeholder='Nhập quốc tịch')
+                            .col-md-12
+                                .form-group
+                                    label Địa chỉ
+                                    input#address1.form-control(type='text' placeholder='Nhập địa chỉ nhận vé')
+                                .form-group
+                                    input#address2.form-control(type='text' placeholder='Nhập tiếp địa chỉ nếu còn')
+                            .col-md-12
+                                label(for='zip') Số CMND
+                                input#zip.form-control(type='text' name='zip' placeholder='Nhập số CMND')
+                .col-lg-5.mt-5.mt-lg-0.align-self-end
+                    .p-3.p-lg-5.border
+                        h3.mb-3 Thông tin vé
+                        ul.list-unstyled.mt-5
+                            li.mb-3.border-bottom.pb-3
+                                span  1 x Product Name 
+                                |  $ 2404.00
+                            li.mb-3.border-bottom.pb-3
+                                span  1 x Product Name 
+                                |  $ 498.00
+                            li.mb-3.border-bottom.pb-3
+                                span  Shipping 
+                                |  $ 0.00
+                            li.mb-3.border-bottom.pb-3
+                                span  Subtotal 
+                                |  $ 2830.00
+                            li
+                                span
+                                    strong.cart-total  Total :
+                                strong.cart-total $ 2830.00 
+                    button.btn.btn-primary.btn-block Đặt vé

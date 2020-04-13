@@ -14,6 +14,8 @@ const movieRoutes = require("./routes/movie.route");
 const authRoutes = require("./routes/auth.route");
 const cartRoutes = require("./routes/cart.route");
 
+const authMiddleware = require("./middlewares/auth.middleware");
+
 app.set("view engine", "pug");
 app.set("views", "./views");
 

@@ -207,6 +207,11 @@ header .navbar-nav .nav-item {
   background-color: #fe7900;
 }
 
+.form-control {
+  height: 3rem;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 767.98px) {
   /* The container */
   .seat {

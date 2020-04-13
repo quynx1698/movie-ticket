@@ -20,7 +20,12 @@ block content
                 .col-lg-7
                     .checkout-form
                         h2.mb-4 Thông tin thanh toán
-                        form.row.row-cols-md-2.row-cols-1(action='/' method="POST")
+                        form.row.row-cols-md-2.row-cols-1(action='/cart/success' method="POST" id="ticketInfo")
+                            input(type="hidden", name="id", value=ticket.id)
+                            input(type="hidden", name="name", value=ticket.name)
+                            input(type="hidden", name="showtimeDate", value=ticket.showtimeDate)
+                            input(type="hidden", name="showtimeTime", value=ticket.showtimeTime)
+                            input(type="hidden", name="seat", value=ticket.seat)
                             .col
                                 .form-group
                                     label(for='firstname') Họ
@@ -32,38 +37,38 @@ block content
                             .col
                                 .form-group
                                     label(for='phoneNum') Số điện thoại
-                                    input.form-control(type='tel' pattern='[0-9]{10}' name='phoneNum' placeholder='Nhập số điện thoại')
+                                    input.form-control(type='tel' name='phoneNum' placeholder='Nhập số điện thoại')
                             .col
                                 .form-group
-                                    label(for='country') Quốc tịch
-                                    input.form-control(type='text' name='country' placeholder='Nhập quốc tịch')
+                                    label(for='cmnd') Số CMND
+                                    input.form-control(type='text' name='cmnd' placeholder='Nhập số CMND')
                             .col-md-12
                                 .form-group
                                     label Địa chỉ
-                                    input#address1.form-control(type='text' placeholder='Nhập địa chỉ nhận vé')
+                                    input#address1.form-control(type='text' name="address1" placeholder='Nhập địa chỉ nhà')
                                 .form-group
-                                    input#address2.form-control(type='text' placeholder='Nhập tiếp địa chỉ nếu còn')
+                                    input#address2.form-control(type='text' name="address2" placeholder='Quận / Huyện')
                             .col-md-12
-                                label(for='zip') Số CMND
-                                input#zip.form-control(type='text' name='zip' placeholder='Nhập số CMND')
+                                label(for='city') Thành phố
+                                input#zip.form-control(type='text' name='city' placeholder='Thành phố')
                 .col-lg-5.mt-5.mt-lg-0.align-self-end
                     .p-3.p-lg-5.border
                         h3.mb-3 Thông tin vé
                         ul.list-unstyled.mt-5
                             li.mb-3.border-bottom.pb-3
-                                span  1 x Product Name 
-                                |  $ 2404.00
+                                |  Tên phim : 
+                                span= ticket.name
                             li.mb-3.border-bottom.pb-3
-                                span  1 x Product Name 
-                                |  $ 498.00
+                                |  Ngày chiếu : 
+                                span= ticket.showtimeDate
                             li.mb-3.border-bottom.pb-3
-                                span  Shipping 
-                                |  $ 0.00
+                                |  Giờ chiếu : 
+                                span= ticket.showtimeTime
                             li.mb-3.border-bottom.pb-3
-                                span  Subtotal 
-                                |  $ 2830.00
+                                |  Ghế ngồi : 
+                                span= ticket.seat
                             li
                                 span
-                                    strong.cart-total  Total :
-                                strong.cart-total $ 2830.00 
-                    button.btn.btn-primary.btn-block Đặt vé
+                                    strong.cart-total  Tổng tiền : 
+                                strong.cart-total= ticket.total
+                    button.btn.btn-primary.btn-block(type="submit" form="ticketInfo") Đặt vé

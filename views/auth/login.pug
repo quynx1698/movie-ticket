@@ -1,14 +1,30 @@
-h1 Login
+extends ../layouts/common
 
-if errors
-    each error in errors
-        .alert= error
-
-form(method="POST")
-    label(for="email") Tài khoản
-    input(type="text", name="email", value=values ? values.email : "")
-
-    label(for="password") Mật khẩu
-    input(type="text", name="password", value=values ? values.password : "")
-
-    button Login
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Thông tin phim
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Phim
+                                li.breadcrumb-item.active.text-primary Đặt vé xem phim
+    section
+        .container
+            .row.justify-content-center
+                .col-6
+                    if errors
+                        each error in errors
+                            .alert.alert-danger= error
+                    h2.text-center Đăng nhập
+                    form(method="POST")
+                        .form-group.mt-5
+                            input#email.form-control(type="email" name="email" placeholder="Địa chỉ email" value=values ? values.email : "")
+                        .form-group.mt-4
+                            input#password.form-control(type="password" name="password" placeholder="Mật khẩu" value=values ? values.password : "")
+                        button.btn.btn-primary.btn-block.mt-4 Đăng nhập

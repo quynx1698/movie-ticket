@@ -1,0 +1,89 @@
+extends ../layouts/common
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Thông tin tài khoản
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Thành viên
+                                li.breadcrumb-item.active.text-primary Thông tin tài khoản
+    section.page-content.pb-2
+        .container
+            .row.justify-content-between
+                .col-md-6
+                    .d-flex.justify-content-center
+                        img.user-avt(src= user.thumbnail || '/images/no-thumb.jpg' alt= user.name || user.email)
+                .col-md-6.mt-5.mt-md-0
+                    .product-details
+                        h4.mb-4= user.name || user.email
+                        .entry-pg
+                            span.pg.bg-warning.py-1.px-2.text-white.text-uppercase Member
+                            span.text-warning
+                                i.ml-3.fa.fa-clock-o
+                                span &nbsp
+                                span= user.dateCreate
+                        table.table.table-borderless.mt-4
+                            thead.d-block
+                                tr.d-block.float-left
+                                    th.d-block Họ & tên:
+                                    th.d-block Email:
+                                    th.d-block Giới tính:
+                                    th.d-block Ngày sinh:
+                                    th.d-block Số điện thoại:
+                                    th.d-block Số CMND:
+                                    th.d-block Địa chỉ:
+                            tbody.d-block
+                                tr.d-block.float-left
+                                    td.d-block= user.firstname + " " + user.lastname || 'Chưa có thông tin'
+                                    td.d-block= user.email
+                                    - var sex = "Chưa có thông tin";
+                                    if user.sex
+                                        if user.sex == "male"
+                                            - sex = "Nam";
+                                        else
+                                            - sex = "Nữ"
+                                    td.d-block= sex
+                                    td.d-block= user.birthday || 'Chưa có thông tin'
+                                    td.d-block= user.phoneNum || 'Chưa có thông tin'
+                                    td.d-block= user.cmnd || 'Chưa có thông tin'
+                                    td.d-block= `${user.address}, ${user.district}, ${user.city}` || 'Chưa có thông tin'
+    section.desc-content.pt-0
+        .container
+            .row
+                .col
+                    h5.mb-4 Thông tin vé đã đặt
+                    .table-responsive
+                        table.table
+                            thead.bg-primary.text-white
+                                tr.text-center
+                                    th Mã vé
+                                    th Tên phim
+                                    th Ngày chiếu
+                                    th Giờ chiếu
+                                    th Ghế ngồi
+                                    th Giá vé
+                            tbody
+                                each ticket in ticketId
+                                    tr.text-center
+                                        td= ticket
+                                        td
+                                            a(href="/movies/" + user.cart[ticket].id)= user.cart[ticket].name
+                                        td= user.cart[ticket].showtimeDate
+                                        td= user.cart[ticket].showtimeTime
+                                        td= user.cart[ticket].seat
+                                        - var sum = 0;
+                                        - var seat = user.cart[ticket].seat;
+                                        - if (seat.includes("A") || seat.includes("B")) sum = 80000;
+                                        - if (seat.includes("C") || seat.includes("D")) sum = 65000;
+                                        - if (seat.includes("E") || seat.includes("F")) sum = 45000;
+                                        - var total = sum.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+                                        - total = total.slice(1) + total.slice(0, 1);
+                                        td= total
+    

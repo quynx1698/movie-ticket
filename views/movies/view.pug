@@ -30,25 +30,25 @@ block content
                                 span &nbsp
                                 span= movie.duration
                         table.table.table-borderless.mt-4
-                            thead
-                                tr
-                                    th Diễn viên:
-                                    th Đạo diễn:
-                                    th Thể loại:
-                                    th Ngày phát hành:
-                                    th Quốc gia:
-                                    th Điểm IMDB:
-                                    th Nhà sản xuất:
-                            tbody
-                                tr
-                                    td= movie.actor
-                                    td= movie.director
-                                    td= movie.genre
-                                    td= movie.release
-                                    td= movie.nation
-                                    td= movie.imdb
-                                    td= movie.producer
-    section.desc-content
+                            thead.d-block
+                                tr.d-block.float-left
+                                    th.d-block Diễn viên:
+                                    th.d-block Đạo diễn:
+                                    th.d-block thể loại:
+                                    th.d-block Ngày phát hành:
+                                    th.d-block Quốc gia:
+                                    th.d-block Điểm IMDB:
+                                    th.d-block Nhà sản xuất:
+                            tbody.d-block
+                                tr.d-block.float-left
+                                    td.d-block= movie.actor
+                                    td.d-block= movie.director
+                                    td.d-block= movie.genre
+                                    td.d-block= movie.release
+                                    td.d-block= movie.nation
+                                    td.d-block= movie.imdb
+                                    td.d-block= movie.producer
+    section.desc-content.pt-3
         .container
             .row
                 .col

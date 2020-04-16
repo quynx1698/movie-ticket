@@ -27,18 +27,6 @@ section {
   padding: 5rem 0;
 }
 
-tr {
-  display: block;
-  float: left;
-}
-
-th,
-td,
-thead,
-tbody {
-  display: block;
-}
-
 .navbar-brand {
   font-size: 2rem;
 }
@@ -214,6 +202,12 @@ header .navbar-nav .nav-item {
 .form-control {
   height: 3rem;
   font-size: 0.8rem;
+}
+
+.user-avt {
+  width: 300px;
+  height: 450px;
+  object-fit: contain;
 }
 
 @media (max-width: 767.98px) {

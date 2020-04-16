@@ -3,6 +3,17 @@ var mongoose = require("mongoose");
 var movieSchema = new mongoose.Schema({
   email: String,
   password: String,
+  name: String,
+  dateCreate: String,
+  firstname: String,
+  lastname: String,
+  sex: String,
+  birthday: String,
+  phoneNum: String,
+  cmnd: String,
+  address: String,
+  district: String,
+  city: String,
   cart: Object,
 });
 

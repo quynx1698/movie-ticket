@@ -159,6 +159,10 @@ header .navbar-nav .nav-item {
   box-shadow: 0 10px 55px 5px rgba(137, 173, 255, 0.15) !important;
 }
 
+.box-shadow {
+  box-shadow: 0 10px 55px 5px rgba(137, 173, 255, 0.15) !important;
+}
+
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link:hover {
   background: #1360ef;

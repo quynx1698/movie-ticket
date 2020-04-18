@@ -20,7 +20,11 @@ block content
                 .col-md-6
                     .d-flex.justify-content-center
                         img.user-avt(src= user.thumbnail || '/images/no-thumb.jpg' alt= user.name || user.email)
-                .col-md-6.mt-5.mt-md-0
+                .col-md-6.mt-5.mt-md-0.position-relative
+                    .update-profile
+                        a.btn.btn-primary(href="/user/update")
+                            | Sửa thông tin &nbsp
+                            i.fa.fa-pencil
                     .product-details
                         h4.mb-4= user.name || user.email
                         .entry-pg
@@ -74,7 +78,7 @@ block content
                                     tr.text-center
                                         td= ticket
                                         td
-                                            a(href="/movies/" + user.cart[ticket].id)= user.cart[ticket].name
+                                            a.link-title(href="/movies/" + user.cart[ticket].id)= user.cart[ticket].name
                                         td= user.cart[ticket].showtimeDate
                                         td= user.cart[ticket].showtimeTime
                                         td= user.cart[ticket].seat

@@ -210,6 +210,12 @@ header .navbar-nav .nav-item {
   object-fit: contain;
 }
 
+.update-profile {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 @media (max-width: 767.98px) {
   /* The container */
   .seat {

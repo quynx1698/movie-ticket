@@ -1,4 +1,251 @@
-h1 Hello World!
-a(href="/movies") Movie list
+extends ./layouts/common
 
-img(src="/images/logo.png", alt="logo")
+block content
+    section
+        .container
+            .row.align-items-center
+                .col-lg-5.col-xl-6.order-lg-2.mb-5.mb-lg-0
+                    img.img-fluid(src="/images/cinema.png" alt="cinema")
+                .col-lg-7.col-xl-6.order-lg-1
+                    h1.display-4.font-weight-bold
+                        | Rạp chiếu phim 
+                        span.text-primary Galaxy Cinema 
+                        | hân hạnh chào đón bạn!
+                    p.lead.text-muted
+                        | Rạp phim chúng tôi luôn sẵn sàng mang đến cho bạn những phút giây thư giãn và thoải mái nhất với khẩu hiệu của mình: "Galaxy Cinema - Mang Hollywood đến gần bạn".
+                    a.btn.btn-primary.shadow.mr-2(href='#')
+                        | Về chúng tôi
+                    a.btn.btn-outline-primary(href='/movies')
+                        | Danh sách phim
+    section
+        .container
+            .row.justify-content-center.text-center
+                .col-lg-8.mb-5.mb-lg-0
+                    .mb-5
+                        span.badge.badge-primary-soft.p-2
+                            | Chúng tôi mang đến
+                        h2.mt-3.font-w-5 Dịch vụ xem phim chất lượng cao
+                        p.lead.mb-0
+                            | Tất cả các dịch vụ chúng tôi cung cấp đều rất rõ ràng, chất lượng và tiện lợi để khách hàng có thể sử dụng một cách dễ dàng.
+            .row.align-items-center
+                .col-lg-3.col-md-6.mb-5.mb-md-0
+                    .px-4.py-5.text-center
+                        div
+                            img.img-fluid(src='/images/movie.svg' alt='movie')
+                        h5.mt-4.mb-3 Phim chất lượng cao
+                        p Các bộ phim đều đã được mua bản quyển công chiếu với chất lượng tốt nhất.
+                .col-lg-3.col-md-6.mb-5.mb-md-0
+                    .px-4.py-5.text-center
+                        div
+                            img.img-fluid(src='/images/ticket.svg' alt='support')
+                        h5.mt-4.mb-3 Đặt vé trực tuyến
+                        p Dễ dàng đặt mua vé những bộ phim mình yêu thích ngay trên trang web.
+                .col-lg-3.col-md-6.mb-5.mb-md-0
+                    .px-4.py-5.text-center
+                        div
+                            img.img-fluid(src='/images/delivery.svg' alt='delivery')
+                        h5.mt-4.mb-3 Giao vé tận nơi
+                        p Vé của quý khách sẽ được giao đến tận nhà trong thời gian sớm nhất.
+                .col-lg-3.col-md-6.mb-5.mb-md-0
+                    .px-4.py-5.text-center
+                        div
+                            img.img-fluid(src='/images/support.svg' alt='support')
+                        h5.mt-4.mb-3 Hỗ trợ 24/7
+                        p Đội ngũ nhân viên linh hoạt luôn sẵn sàng hỗ trợ bất cứ khi nào bạn cần.
+    section
+        .container-fluid
+            .row.align-items-center.justify-content-between
+                .col-lg-6.mb-5.mb-lg-0
+                    img.img-fluid(src="/images/about-us.png", alt="about us")
+                    .video-btn
+                        a.video-link(href="https://www.youtube.com/watch?v=wIeEpp1nrmU&t" target="_blank")
+                            i.fa.fa-play-circle.fa-5x
+                .col-lg-6.col-xl-5
+                    .row.text-center
+                        .col-md-6
+                            .counter.bg-primary.rounded.p-5.box-shadow
+                                .counter-desc.text-white
+                                    h5 Phim đã chiếu
+                                    span.display-4
+                                        sup.font-size-normal trên
+                                        | 1000
+                        .col-md-6.mt-5
+                            .counter.bg-white.rounded.p-5.box-shadow
+                                .counter-desc
+                                    h5 Lượt người xem
+                                    span.display-4.text-primary
+                                        sup.font-size-normal trên
+                                        | 1000k
+                        .col-md-6.mt-5.mt-md-0
+                            .counter.bg-white.rounded.p-5.box-shadow
+                                .counter-desc
+                                    h5 Lượt yêu thích
+                                    span.display-4.text-primary
+                                        sup.font-size-normal trên 
+                                        | 200k                        
+                        .col-md-6.mt-5
+                            .counter.bg-orange.rounded.p-5.box-shadow
+                                .counter-desc.text-white
+                                    h5 Lượt hài lòng
+                                    span.display-4
+                                        sup.font-size-normal trên 
+                                        | 100k                        
+    section
+        .container
+            .row.align-items-center.justify-content-between
+                .col-lg-6.mb-5.mb-lg-0.order-lg-1
+                    .row.align-items-center
+                        .col-7
+                            img.img-fluid.rounded.shadow-lg(src='/images/tong-hop-kinh-nghiem-di-xem-phim-gia-re.jpeg' alt='rạp')
+                        .col-5
+                            img.img-fluid.rounded.shadow-lg.mb-4(src='/images/galaxy-cinema-galaxy-cinema-ho-chi-minh-city.jpg' alt='rạp')
+                            img.img-fluid.rounded.shadow-lg.mt-1(src='/images/rap-chieu-phim-galaxy-huynh-tan-phat-tphcm.jpg' alt='rạp')
+                .col-lg-6.col-xl-5
+                    div
+                        span.badge.badge-primary-soft.p-2
+                            | Về chúng tôi
+                        h2.mt-3.font-w-5 Galaxy Cinema
+                        p.lead
+                            | Là một trong những công ty đầu tiên về điện ảnh, được thành lập từ năm 2003. Tự hào là 1 trong 10 địa điểm vui chơi giải trí được yêu thích nhất.
+                        p.mb-0
+                            | Hệ thống rạp chiếu phim hiện đại, thu hút hàng triệu lượt người đến xem, cũng như chất lượng dịch vụ luôn đặt lên hàng đầu.
+                    a.btn.btn-outline-primary.mt-3(href='#')
+                        | Đọc thêm
+    section
+        .container
+            .row.align-items-end.mb-5
+                .col-lg-5
+                    div
+                        span.badge.badge-primary-soft.p-2
+                            | Danh sách phim
+                        h2.mt-3 Vô vàn bộ phim hấp dẫn đang chờ đợi bạn.
+                .col-lg-6.ml-auto
+                        div
+                            p.lead.mb-0
+                                | Chúng tôi sẽ mang đến cho bạn tất cả các bộ phim chiếu rạp đặc sắc nhất với đa dạng các thể loại, thuộc nhiều quốc gia trên thế giới.
+            .row
+                .col-lg-3
+                    #mytab.nav.flex-column.nav-pills.text-center
+                        a#ongoing-tab.nav-link.active.py-3.mb-1(data-toggle='pill' href='#ongoing') Phim đang chiếu
+                        a#airing-tab.nav-link.py-3.mb-5.mb-lg-0(data-toggle='pill' href='#airing') Phim sắp chiếu
+                .col-lg-9
+                    #mytabContent.tab-content
+                        #ongoing.tab-pane.fade.show.active
+                            .row.row-cols-1.row-cols-md-2.row-cols-lg-3
+                                each movie in movies
+                                    .col.mb-5
+                                        .movie-item
+                                            .movie-img.hover-translate
+                                                a(href='/movies/view/' + movie.id)
+                                                    img.img-fluid.rounded(src=movie.thumbnail alt=movie.name)
+                                            .movie-desc
+                                                a.movie-name.mt-4.mb-2.d-block.link-title(href='/movies/' + movie.id)= movie.name
+                                                p.movie-genre.text-muted= movie.genre
+                        #airing.tab-pane.fade
+                            .row.row-cols-1.row-cols-md-2.row-cols-lg-3
+                                each movie in movies
+                                    .col.mb-5
+                                        .movie-item
+                                            .movie-img.hover-translate
+                                                a(href='/movies/view/' + movie.id)
+                                                    img.img-fluid.rounded(src=movie.thumbnail alt=movie.name)
+                                            .movie-desc
+                                                a.movie-name.mt-4.mb-2.d-block.link-title(href='/movies/' + movie.id)= movie.name
+                                                p.movie-genre.text-muted= movie.genre
+                    .more-movie
+                        a.btn.btn-outline-primary.float-right(href="/movies") Xem thêm
+    section.pt-2
+        .container
+            .row.align-items-end.mb-5
+                .col-md-6.col-lg-5.mb-5.mb-md-0
+                    div
+                        span.badge.badge-primary-soft.p-2
+                            | Bảng giá
+                        h2.mt-3 Nhiều lựa chọn, phù hợp với mọi người.
+            .row.align-items-center
+                .col-lg-4.mb-5.mb-lg-0
+                    .card.border-0.box-shadow
+                        .card-body.p-5
+                            .text-center.mb-5
+                                span.badge.box-shadow.mb-5
+                                    span.text-uppercase.h6 Ghế thường
+                                .mb-5
+                                    img.img-fluid(src='/images/normal.svg' alt='normal')
+                                .d-flex.align-items-start.justify-content-between
+                                    p Tầm nhìn bao quát
+                                    .ml-4
+                                        i.fa.fa-times.text-danger.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Ghế ngồi + nằm
+                                    .ml-4
+                                        i.fa.fa-times.text-danger.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Nước ngọt miễn phí
+                                    .ml-4
+                                        i.fa.fa-times.text-danger.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Bắp miễn phí
+                                    .ml-4
+                                        i.fa.fa-times.text-danger.font-weight-bold
+                                .d-flex.justify-content-center.mt-5
+                                    span.price.display-3.text-primary.font-w-6 55
+                                    span.h3.mb-0.mt-2 &nbspk
+                                p.text-center.text-muted mỗi vé
+                .col-lg-4
+                    .card.border-0.box-shadow
+                        .card-body.p-5
+                            .text-center.mb-5
+                                span.badge.box-shadow.mb-5
+                                    span.text-uppercase.h6 Ghế cao cấp
+                                .mb-5
+                                    img.img-fluid(src='/images/premium.svg' alt='premium')
+                                .d-flex.align-items-start.justify-content-between
+                                    p Tầm nhìn bao quát
+                                    .ml-4
+                                        i.fa.fa-check.text-success.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Ghế ngồi + nằm
+                                    .ml-4
+                                        i.fa.fa-times.text-danger.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Nước ngọt miễn phí
+                                    .ml-4
+                                        i.fa.fa-check.text-success.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Bắp miễn phí
+                                    .ml-4
+                                        i.fa.fa-times.text-danger.font-weight-bold
+                                .d-flex.justify-content-center.mt-5
+                                    span.price.display-3.text-primary.font-w-6 85
+                                    span.h3.mb-0.mt-2 &nbspk
+                                p.text-center.text-muted mỗi vé
+                .col-lg-4
+                    .card.border-0.box-shadow
+                        .card-body.p-5
+                            .text-center.mb-5
+                                span.badge.box-shadow.mb-5
+                                    span.text-uppercase.h6 Ghế bạch kim
+                                .mb-5
+                                    img.img-fluid(src='/images/platinum.svg' alt='platinum')
+                                .d-flex.align-items-start.justify-content-between
+                                    p Tầm nhìn bao quát
+                                    .ml-4
+                                        i.fa.fa-check.text-success.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Ghế ngồi + nằm
+                                    .ml-4
+                                        i.fa.fa-check.text-success.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Nước ngọt miễn phí
+                                    .ml-4
+                                        i.fa.fa-check.text-success.font-weight-bold
+                                .d-flex.align-items-start.justify-content-between
+                                    p Bắp miễn phí
+                                    .ml-4
+                                        i.fa.fa-check.text-success.font-weight-bold
+                                .d-flex.justify-content-center.mt-5
+                                    span.price.display-3.text-primary.font-w-6 115
+                                    span.h3.mb-0.mt-2 &nbspk
+                                p.text-center.text-muted mỗi vé
+            .row.justify-content-center.mt-5
+                a.btn.btn-primary(href="/movies") Đặt vé ngay

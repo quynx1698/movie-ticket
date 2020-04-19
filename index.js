@@ -17,6 +17,8 @@ const userRoutes = require("./routes/user.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 
+const Movie = require("./models/movie.model");
+
 app.set("view engine", "pug");
 app.set("views", "./views");
 
@@ -26,7 +28,12 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => res.render("index"));
+app.get("/", async (req, res) => {
+  let data = await Movie.find();
+  res.render("index", {
+    movies: data.slice(0, 3),
+  });
+});
 
 app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);

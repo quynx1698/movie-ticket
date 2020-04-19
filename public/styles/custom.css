@@ -18,7 +18,8 @@ a:hover {
   text-decoration: none;
 }
 
-p {
+p,
+.par {
   color: #8090b5;
   line-height: 1.7;
 }
@@ -214,6 +215,63 @@ header .navbar-nav .nav-item {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.badge-primary-soft {
+  background-color: rgba(19, 96, 239, 0.1);
+  color: #1360ef;
+}
+
+.bg-orange {
+  background-color: #f94f15 !important;
+}
+
+.font-size-normal {
+  font-size: 1rem;
+}
+
+.video-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 99;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.video-link {
+  color: #eee;
+}
+
+.video-link:hover {
+  color: #64e9ee;
+}
+
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.btn-outline-primary {
+  color: #1360ef;
+  border-color: #1360ef;
+}
+
+.btn-outline-primary:hover {
+  background-color: #f94f15;
+  border-color: #f94f15;
+}
+
+.nav-link {
+  color: #1d1d33;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.h6 {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 @media (max-width: 767.98px) {

@@ -260,11 +260,11 @@ header .navbar-nav .nav-item {
   border-color: #f94f15;
 }
 
-.nav-link {
+.nav-0 {
   color: #1d1d33;
 }
 
-.nav-link:hover {
+.nav-0:hover {
   color: #fff;
   background-color: #007bff;
 }

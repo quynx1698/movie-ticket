@@ -30,4 +30,4 @@ block content
                         .form-group.mt-4
                             input#password.form-control(type="password" name="password" placeholder="Mật khẩu" value=values ? values.password : "")
                         button.btn.btn-primary.btn-block.mt-4 Đăng nhập
-                    a.mt-5(href="/auth/create") Chưa có tài khoản?
+                    a.mt-5(href="/auth/create?path=" + path) Chưa có tài khoản?

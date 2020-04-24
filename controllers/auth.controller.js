@@ -1,8 +1,10 @@
 const User = require("../models/user.model");
-const url = require("url");
 
 module.exports.login = (req, res) =>
-  res.render("auth/login", { isSuccess: req.query.isSuccess });
+  res.render("auth/login", {
+    path: req.query.path,
+    isSuccess: req.query.isSuccess,
+  });
 
 module.exports.postLogin = async (req, res) => {
   let email = req.body.email;
@@ -30,7 +32,7 @@ module.exports.postLogin = async (req, res) => {
     signed: true,
   });
 
-  res.redirect("/");
+  res.redirect(req.query.path);
 };
 
 module.exports.create = (req, res) => {
@@ -66,12 +68,5 @@ module.exports.postCreate = async (req, res) => {
 
   await newUser.save();
 
-  res.redirect(
-    url.format({
-      pathname: "/auth/login",
-      query: {
-        isSuccess: true,
-      },
-    })
-  );
+  res.redirect("/auth/login?path=" + req.query.path + "&isSuccess=true");
 };

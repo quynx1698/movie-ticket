@@ -37,7 +37,7 @@ app.get("/", async (req, res) => {
 
 app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);
-app.use("/cart", cartRoutes);
-app.use("/user", userRoutes);
+app.use("/cart", authMiddleware.requireAuthCart, cartRoutes);
+app.use("/user", authMiddleware.requireAuth, userRoutes);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

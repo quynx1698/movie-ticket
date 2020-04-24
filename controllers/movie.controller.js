@@ -66,6 +66,7 @@ module.exports.postCreate = (req, res) => {
 
 module.exports.get = async (req, res) => {
   let id = req.params.id;
+  req.app.locals.path = "/movies/" + id;
   let movie = await Movie.findById(id);
 
   let showtimeDate = [];

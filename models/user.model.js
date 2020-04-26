@@ -4,6 +4,7 @@ var movieSchema = new mongoose.Schema({
   email: String,
   password: String,
   name: String,
+  thumbnail: String,
   dateCreate: String,
   firstname: String,
   lastname: String,

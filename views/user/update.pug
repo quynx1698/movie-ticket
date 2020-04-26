@@ -18,7 +18,17 @@ block content
         .container
             .row.justify-content-center
                 .col-md-9
-                    form(method="POST").row.row-cols-1.row-cols-md-2.justify-content-center
+                    form(method="POST" encType="multipart/form-data").row.row-cols-1.row-cols-md-2.justify-content-center
+                        .col-md-12
+                            .row.justify-content-center
+                                .col-6
+                                    .form-group.text-center
+                                        label.d-block(for='avt') Ảnh đại diện
+                                        input#avt.d-block.mx-auto.py-3(type="file", name="avt")
+                                        img#output.img-fluid
+                                    .form-group.mt-4.mb-5
+                                        label(for='name') Tên hiển thị
+                                        input.form-control(type='text' name='name' placeholder='Nhập tên hiển thị' value= user.name || user.email)
                         .col
                             .form-group
                                 label(for='firstname') Họ & tên đệm
@@ -63,3 +73,13 @@ block content
                                 input.form-control(type='text' name='city' placeholder='Nhập tỉnh/thành phố' value= user.city || "")
                         .col
                             button.btn.btn-primary.btn-block.mt-5 Cập nhật thông tin
+    script.
+        var avt = document.getElementById('avt');
+        avt.addEventListener('change', function(e) {
+             var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        })
+    

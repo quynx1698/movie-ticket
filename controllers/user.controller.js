@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const cloudinary = require("../cloudinary");
 
 module.exports.get = async (req, res) => {
   let user = await User.findById(req.signedCookies.userId);
@@ -20,6 +21,10 @@ module.exports.updateProfile = async (req, res) => {
 };
 
 module.exports.postUpdate = async (req, res) => {
+  let user = await User.findById(req.signedCookies.userId);
+  const file = req.files.avt;
+  avt = await cloudinary.uploader.upload(file.tempFilePath);
+  req.body.thumbnail = avt.url;
   await User.findByIdAndUpdate(req.signedCookies.userId, req.body);
   res.redirect("/user");
 };

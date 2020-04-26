@@ -20,7 +20,7 @@ block content
                 .col-md-6
                     .d-flex.justify-content-center
                         img.user-avt(src= user.thumbnail || '/images/no-thumb.jpg' alt= user.name || user.email)
-                .col-md-6.mt-5.mt-md-0.position-relative
+                .col-md-6.mt-5.mt-md-0.position-relative.align-self-center
                     .update-profile
                         a.btn.btn-primary(href="/user/update")
                             | Sửa thông tin &nbsp
@@ -58,7 +58,7 @@ block content
                                     td.d-block= user.phoneNum || 'Chưa có thông tin'
                                     td.d-block= user.cmnd || 'Chưa có thông tin'
                                     td.d-block= `${user.address}, ${user.district}, ${user.city}` || 'Chưa có thông tin'
-    section.desc-content.pt-0
+    section.desc-content
         .container
             .row
                 .col

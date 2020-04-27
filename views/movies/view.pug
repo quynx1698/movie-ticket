@@ -61,7 +61,7 @@ block content
                         #tab3-1.tab-pane.fade.show.active(role='tabpanel')
                             p.mb-0= movie.description
                         #tab3-2.tab-pane.fade(role='tabpanel')
-                            form(action='/cart' method='POST')
+                            form(action='/cart' method='GET')
                                 input(type="hidden", name="id", value=movie.id)
                                 input(type="hidden", name="name", value=movie.name)
                                 .row

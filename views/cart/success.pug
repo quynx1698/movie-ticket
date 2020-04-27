@@ -26,5 +26,6 @@ block content
                     p.mt-4
                         | Cảm ơn bạn đã đặt vé tại rạp phim Galaxy Cinema của chúng tôi. Chúc
                         | bạn có một buổi xem phim vui vẻ. Đây là mã vé của bạn:
-                    p.text-danger.mb-4 DSGBKDSGU44534524
+                    p.text-danger.mb-4= id
+                    a.btn.btn-primary.mt-2.mr-3(href='/user') Xem vé đã đặt
                     a.btn.btn-primary.mt-2(href='/') Về trang chủ

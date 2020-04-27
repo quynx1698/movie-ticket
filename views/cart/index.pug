@@ -20,7 +20,7 @@ block content
                 .col-lg-7
                     .checkout-form
                         h2.mb-4 Thông tin thanh toán
-                        form.row.row-cols-md-2.row-cols-1(action='/cart/success' method="POST" id="ticketInfo")
+                        form.row.row-cols-md-2.row-cols-1(method="POST" id="ticketInfo")
                             input(type="hidden", name="id", value=ticket.id)
                             input(type="hidden", name="name", value=ticket.name)
                             input(type="hidden", name="showtimeDate", value=ticket.showtimeDate)

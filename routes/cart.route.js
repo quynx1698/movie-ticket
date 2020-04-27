@@ -3,8 +3,8 @@ var router = express.Router();
 
 const controller = require("../controllers/cart.controller");
 
-router.post("/", controller.postSeat);
+router.get("/", controller.checkout);
 
-router.post("/success", controller.postTicket);
+router.post("/", controller.postCheckout);
 
 module.exports = router;

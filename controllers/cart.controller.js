@@ -3,11 +3,13 @@ const Movie = require("../models/movie.model");
 const generateUniqueId = require("generate-unique-id");
 
 module.exports.checkout = (req, res) => {
-  let sum = 0;
-  let seat = req.query.seat;
-  if (seat.includes("A") || seat.includes("B")) sum = 80000;
-  if (seat.includes("C") || seat.includes("D")) sum = 65000;
-  if (seat.includes("E") || seat.includes("F")) sum = 45000;
+  let seatList = req.query.seat;
+  let sum = seatList.reduce((x, y) => {
+    if (y.includes("A") || y.includes("B")) y = 80000;
+    if (y.includes("C") || y.includes("D")) y = 65000;
+    if (y.includes("E") || y.includes("F")) y = 45000;
+    return x + y;
+  }, 0);
   let total = sum.toLocaleString("it-IT", {
     style: "currency",
     currency: "VND",
@@ -21,17 +23,28 @@ module.exports.checkout = (req, res) => {
 
 module.exports.postCheckout = async (req, res) => {
   let user = await User.findById(req.signedCookies.userId);
-  let movie = await Movie.findById(req.body.id);
 
   const id = generateUniqueId();
   user.cart[id] = req.body;
-
-  let seatInfo = req.body.seat;
-  movie.showtime[req.body.showtimeDate][req.body.showtimeTime][
-    seatInfo.slice(0, 1)
-  ][seatInfo.slice(1)] = false;
-
   await User.findByIdAndUpdate(req.signedCookies.userId, { cart: user.cart });
+
+  let movie = await Movie.findById(req.body.id);
+
+  let date = req.body.showtimeDate;
+  let time = req.body.showtimeTime;
+  for (const seat of JSON.parse(req.body.seat)) {
+    let seatLine = seat.slice(0, 1);
+    let seatIndex = seat.slice(1);
+    if (!movie.showtime[date][time][seatLine][seatIndex]) {
+      req.app.locals.isBooked = true;
+      res.redirect(req.app.locals.path);
+      return;
+    }
+    movie.showtime[date][time][seatLine][seatIndex] = false;
+  }
+
+  req.app.locals.isBooked = false;
+
   await Movie.findByIdAndUpdate(req.body.id, { showtime: movie.showtime });
 
   res.render("cart/success", {

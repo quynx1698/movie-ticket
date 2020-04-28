@@ -82,12 +82,5 @@ block content
                                         td= user.cart[ticket].showtimeDate
                                         td= user.cart[ticket].showtimeTime
                                         td= user.cart[ticket].seat
-                                        - var sum = 0;
-                                        - var seat = user.cart[ticket].seat;
-                                        - if (seat.includes("A") || seat.includes("B")) sum = 80000;
-                                        - if (seat.includes("C") || seat.includes("D")) sum = 65000;
-                                        - if (seat.includes("E") || seat.includes("F")) sum = 45000;
-                                        - var total = sum.toLocaleString("it-IT", { style: "currency", currency: "VND" });
-                                        - total = total.slice(1) + total.slice(0, 1);
-                                        td= total
+                                        td= user.cart[ticket].total
     

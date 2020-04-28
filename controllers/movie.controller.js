@@ -97,9 +97,12 @@ module.exports.get = async (req, res) => {
     }
   }
 
+  let err = req.app.locals.isBooked;
+
   res.render("movies/view", {
     movie: movie,
     showtimeDate: showtimeDate,
     showtimeTime: showtimeTime,
+    error: err,
   });
 };

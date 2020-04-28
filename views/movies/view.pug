@@ -16,6 +16,8 @@ block content
                                 li.breadcrumb-item.active.text-primary Thông tin phim
     section.page-content
         .container
+            if error
+                .alert.alert-danger.mb-5 Ghế của bạn vừa được người khác đặt, xin vui lòng chọn lại ghế.
             .row.justify-content-between
                 .col-md-6
                     .d-flex.justify-content-center
@@ -94,9 +96,9 @@ block content
                                                     each seatPos in movie.showtime[showtimeDate[0]][showtimeTime[showtimeDate[0]][0]][seatL]
                                                         label.seat
                                                             if seatPos
-                                                                input(type='radio' name='seat' value=seatL+i)
+                                                                input(type='checkbox' name='seat[]' value=seatL+i)
                                                             else
-                                                                input(type='radio' name='seat' disabled value=seatL+i)
+                                                                input(type='checkbox' name='seat[]' disabled value=seatL+i)
                                                             span.checkmark
                                                             - i = i + 1;
                                 .row.justify-content-center.mt-3

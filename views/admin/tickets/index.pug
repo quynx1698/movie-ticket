@@ -1,0 +1,43 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Bảng điều khiển
+                                li.breadcrumb-item.active.text-primary Quản lý vé
+    section
+        .container
+            table.table.table-hover
+                thead
+                    tr.bg-primary.text-white
+                        th.p-3 Mã vé đã đặt
+                        th.p-3 Tài khoản người đặt
+                        th.p-3 Tên phim
+                        th.p-3 Tổng tiền
+                        th.p-3 Thao tác
+                tbody
+                    each user in users
+                        - var cartId = Object.keys(user.cart);
+                        - var i = 0;
+                        each cart in user.cart
+                            tr
+                                td.p-3= cartId[i]
+                                td.p-3= user.email
+                                td.p-3= cart.movieName
+                                td.p-3= cart.total
+                                td.p-3
+                                    a.border.p-1.hover-warning(href="/admin/tickets/detail/" + cartId[i]) Chi tiết
+                                    | &nbsp
+                                    a.border.p-1.hover-warning(href="/admin/tickets/update/" + cartId[i]) Cập nhật
+                                    | &nbsp
+                                    a.border.p-1.hover-warning(href="/admin/tickets/delete/" + cartId[i]) Xoá
+                            - i = i + 1;

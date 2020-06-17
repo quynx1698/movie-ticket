@@ -1,0 +1,61 @@
+extends ../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Bảng điều khiển
+                                li.breadcrumb-item.active.text-primary Thao tác
+    section.pt-5
+        .container
+            .row.justify-content-center.text-center
+                .col-12.mt-4
+                    .row.align-items-center
+                        .col-lg-4.col-md-6.mb-3
+                            .px-4.py-5.rounded.hover-translate
+                                a(href="/admin/movies")
+                                    i.fa.fa-film.fa-4x.text-primary
+                                h5.mt-4.mb-3
+                                    a.link-title(href="/admin/movies") Quản lý phim
+                                p.mb-0
+                                | Thêm phim mới, xem chi tiết phim, cập nhật thông tin phim và xoá phim đã tạo.
+                        .col-lg-4.col-md-6.mb-3
+                            .px-4.py-5.rounded.hover-translate
+                                a(href="/admin/tickets")
+                                    i.fa.fa-ticket.fa-4x.text-primary
+                                h5.mt-4.mb-3
+                                    a.link-title(href="/admin/tickets") Quản lý vé
+                                p.mb-0
+                                | Xem thông tin vé khách hàng đã đặt, thống kê số lượng vé đã bán được.
+                        .col-lg-4.col-md-6.mb-3
+                            .px-4.py-5.rounded.hover-translate
+                                a(href="#")
+                                    i.fa.fa-calendar-check-o.fa-4x.text-primary
+                                h5.mt-4.mb-3
+                                    a.link-title(href="#") Quản lý lịch chiếu
+                                p.mb-0
+                                | Xếp lịch chiếu cho các phim đã tạo, xem lịch chiếu hiện có.
+                        .col-lg-4.col-md-6.mb-3
+                            .px-4.py-5.rounded.hover-translate
+                                a(href="#")
+                                    i.fa.fa-sitemap.fa-4x.text-primary
+                                h5.mt-4.mb-3
+                                    a.link-title(href="#") Quản lý ghế
+                                p.mb-0
+                                | Xem thông tin chỗ ngồi, cập nhật thông tin ghế ngồi trong rạp.
+                        .col-lg-4.col-md-6.mb-3
+                            .px-4.py-5.rounded.hover-translate
+                                a(href="#")
+                                    i.fa.fa-user-circle-o.fa-4x.text-primary
+                                h5.mt-4.mb-3
+                                    a.link-title(href="#") Quản lý user
+                                p.mb-0
+                                | Thêm người dùng mới, cập nhật thông tin thông tin và xoá tài khoản người dùng.

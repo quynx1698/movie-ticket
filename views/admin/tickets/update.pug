@@ -1,0 +1,65 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Quản lý phim
+                                li.breadcrumb-item.active.text-primary Cập nhật phim
+    section
+        .container
+            .row.justify-content-center
+                .col-md-9
+                    form(method="POST" encType="multipart/form-data").row.row-cols-1.row-cols-md-2.justify-content-center
+                        input(type='hidden' name='movieID' value= ticket.movieID)
+                        .col-md-12
+                            .form-group
+                                label(for='movieName') Tên phim
+                                input.form-control(type='text' name='movieName' placeholder='Nhập tên phim' value= ticket.movieName)
+                        .col
+                            .form-group
+                                label(for='showtimeDate') Ngày chiếu
+                                input.form-control(type='text' name='showtimeDate' placeholder='Nhập ngày chiếu' value= ticket.showtimeDate)
+                        .col
+                            .form-group
+                                label(for='showtimeTime') Giờ chiếu
+                                input.form-control(type='text' name='showtimeTime' placeholder='Nhập giờ chiếu' value= ticket.showtimeTime)
+                        .col
+                            .form-group
+                                label(for='seat') Ghế ngồi
+                                input.form-control(type='text' name='seat' placeholder='Nhập ghế ngồi' value= ticket.seat)
+                        .col
+                            .form-group
+                                label(for='total') Tổng tiền
+                                input.form-control(type='text' name='total' placeholder='Nhập tổng tiền' value= ticket.total)
+                        .col-md-12
+                            .form-group
+                                label(for='name') Họ và tên
+                                input.form-control(type='text' name='name' placeholder='Nhập họ tên' value= ticket.name)
+                        .col
+                            .form-group
+                                label(for='phoneNum') Số điện thoại
+                                input.form-control(type='text' name='phoneNum' placeholder='Nhập số điện thoại' value= ticket.phoneNum)
+                        .col
+                            .form-group
+                                label(for='cmnd') Số CMND
+                                input.form-control(type='text' name='cmnd' placeholder='Nhập số CMND' value= ticket.cmnd)
+                        
+                        .col-md-12
+                            .form-group
+                                label(for='address') Địa chỉ
+                                textarea.form-control(rows="3" name='address' placeholder='Nhập địa chỉ')= ticket.address
+                        .col-md-12
+                            .form-group
+                                label(for='city') Thành phố
+                                input.form-control(type='text' name='city' placeholder='Nhập thành phố' value= ticket.city)
+                        .col
+                            button.btn.btn-primary.btn-block.mt-4 Cập nhật thông tin

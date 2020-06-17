@@ -1,0 +1,41 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Bảng điều khiển
+                                li.breadcrumb-item.active.text-primary Quản lý phim
+    section
+        .container
+            .row.justify-content-center.align-items-center.mb-4
+                a.btn-create(href="/admin/movies/create")
+                    i.fa.fa-plus-circle.fa-lg
+                    span &nbsp Thêm phim mới
+            table.table.table-hover
+                thead
+                    tr.bg-primary.text-white
+                        th.p-3 Tên phim
+                        th.p-3 Thể loại
+                        th.p-3 Ngày khởi chiếu
+                        th.p-3 Thao tác
+                tbody
+                    each movie in movies
+                        tr
+                            td.p-3= movie.name
+                            td.p-3= movie.genre
+                            td.p-3= movie.release
+                            td.p-3
+                                a.border.p-1.hover-warning(href="/movies/" + movie.id) Chi tiết
+                                | &nbsp
+                                a.border.p-1.hover-warning(href="/admin/movies/update/" + movie.id) Cập nhật
+                                | &nbsp
+                                a.border.p-1.hover-warning(href="/admin/movies/delete/" + movie.id) Xoá

@@ -48,6 +48,10 @@ section {
   border-color: #1360ef;
 }
 
+.btn-create:hover {
+  color: #f94f15;
+}
+
 .navbar-light .navbar-nav .nav-link.active,
 .navbar-light .navbar-nav .nav-link:hover,
 .text-primary,
@@ -74,6 +78,17 @@ header .navbar-nav .nav-item {
 }
 
 .btn-primary:hover {
+  color: #fff;
+  background-color: #f94f15;
+  border-color: #f94f15;
+}
+
+.hover-warning {
+  color: #1d1d33;
+  background-color: #f8f9fa;
+}
+
+.hover-warning:hover {
   color: #fff;
   background-color: #f94f15;
   border-color: #f94f15;

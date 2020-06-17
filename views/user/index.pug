@@ -78,9 +78,9 @@ block content
                                     tr.text-center
                                         td= ticket
                                         td
-                                            a.link-title(href="/movies/" + user.cart[ticket].id)= user.cart[ticket].name
+                                            a.link-title(href="/movies/" + user.cart[ticket].movieID)= user.cart[ticket].movieName
                                         td= user.cart[ticket].showtimeDate
                                         td= user.cart[ticket].showtimeTime
-                                        td= user.cart[ticket].seat
+                                        td= JSON.parse(user.cart[ticket].seat)
                                         td= user.cart[ticket].total
     

@@ -5,9 +5,9 @@ const generateUniqueId = require("generate-unique-id");
 module.exports.checkout = (req, res) => {
   let seatList = req.query.seat;
   let sum = seatList.reduce((x, y) => {
-    if (y.includes("A") || y.includes("B")) y = 80000;
-    if (y.includes("C") || y.includes("D")) y = 65000;
-    if (y.includes("E") || y.includes("F")) y = 45000;
+    if (y.includes("A") || y.includes("B")) y = 155000;
+    else if (y.includes("C") || y.includes("D")) y = 95000;
+    else if (y.includes("E") || y.includes("F")) y = 55000;
     return x + y;
   }, 0);
   let total = sum.toLocaleString("it-IT", {
@@ -28,7 +28,7 @@ module.exports.postCheckout = async (req, res) => {
   user.cart[id] = req.body;
   await User.findByIdAndUpdate(req.signedCookies.userId, { cart: user.cart });
 
-  let movie = await Movie.findById(req.body.id);
+  let movie = await Movie.findById(req.body.movieID);
 
   let date = req.body.showtimeDate;
   let time = req.body.showtimeTime;
@@ -49,5 +49,6 @@ module.exports.postCheckout = async (req, res) => {
 
   res.render("cart/success", {
     id: id,
+    ticket: req.body,
   });
 };

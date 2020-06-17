@@ -1,0 +1,48 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Quản lý vé
+                                li.breadcrumb-item.active.text-primary Thông tin vé
+    section
+        .container
+            .row.justify-content-between
+                .col-md-5
+                    img.img-fluid(src='/images/movie-tickets.svg' alt='movie ticket icon')
+                .col-md-6.align-self-center.mt-5.mt-md-0
+                    h2.mb-4.text-warning.text-center= ticketId
+                    table.table.table-borderless.mt-4.row.justify-content-center
+                        thead.d-block
+                            tr.d-block.float-left
+                                th.d-block Tên phim:
+                                th.d-block Ngày chiếu:
+                                th.d-block Giờ chiếu:
+                                th.d-block Ghế ngồi:
+                                th.d-block Họ & tên:
+                                th.d-block Số điện thoại:
+                                th.d-block CMND:
+                                th.d-block Địa chỉ:
+                                th.d-block Thành phố:
+                                th.d-block.text-primary Tổng tiền:
+                        tbody.d-block
+                            tr.d-block.float-left
+                                td.d-block= ticket.movieName
+                                td.d-block= ticket.showtimeDate
+                                td.d-block= ticket.showtimeTime
+                                td.d-block= JSON.parse(ticket.seat)
+                                td.d-block= ticket.name
+                                td.d-block= ticket.phoneNum
+                                td.d-block= ticket.cmnd
+                                td.d-block= ticket.address
+                                td.d-block= ticket.city
+                                td.d-block= ticket.total

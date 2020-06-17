@@ -21,19 +21,16 @@ block content
                     .checkout-form
                         h2.mb-4 Thông tin thanh toán
                         form.row.row-cols-md-2.row-cols-1(method="POST" id="ticketInfo")
-                            input(type="hidden", name="id", value=ticket.id)
-                            input(type="hidden", name="name", value=ticket.name)
+                            input(type="hidden", name="movieID", value=ticket.id)
+                            input(type="hidden", name="movieName", value=ticket.name)
                             input(type="hidden", name="showtimeDate", value=ticket.showtimeDate)
                             input(type="hidden", name="showtimeTime", value=ticket.showtimeTime)
                             input(type="hidden", name="seat", value=ticket.seat)
-                            .col
+                            input(type="hidden", name="total", value=ticket.total)
+                            .col-md-12
                                 .form-group
-                                    label(for='firstname') Họ
-                                    input.form-control(type='text' name='firstname' placeholder='Nhập họ')
-                            .col
-                                .form-group
-                                    label(for='lastname') Tên
-                                    input.form-control(type='text' name='lastname' placeholder='Nhập tên')
+                                    label(for='name') Họ và tên
+                                    input.form-control(type='text' name='name' placeholder='Nhập họ tên')
                             .col
                                 .form-group
                                     label(for='phoneNum') Số điện thoại
@@ -41,13 +38,11 @@ block content
                             .col
                                 .form-group
                                     label(for='cmnd') Số CMND
-                                    input.form-control(type='text' name='cmnd' placeholder='Nhập số CMND')
+                                    input.form-control(type='number' name='cmnd' placeholder='Nhập số CMND')
                             .col-md-12
                                 .form-group
-                                    label Địa chỉ
-                                    input#address1.form-control(type='text' name="address1" placeholder='Nhập địa chỉ nhà')
-                                .form-group
-                                    input#address2.form-control(type='text' name="address2" placeholder='Quận / Huyện')
+                                    label(for='address') Địa chỉ
+                                    textarea.form-control(rows="3" name='address' placeholder='Nhập địa chỉ')
                             .col-md-12
                                 label(for='city') Thành phố
                                 input#zip.form-control(type='text' name='city' placeholder='Thành phố')

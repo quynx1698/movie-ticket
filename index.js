@@ -15,6 +15,7 @@ const movieRoutes = require("./routes/movie.route");
 const authRoutes = require("./routes/auth.route");
 const cartRoutes = require("./routes/cart.route");
 const userRoutes = require("./routes/user.route");
+const adminRoutes = require("./routes/admin.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 
@@ -45,5 +46,6 @@ app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", authMiddleware.requireAuthCart, cartRoutes);
 app.use("/user", authMiddleware.requireAuth, userRoutes);
+app.use("/admin", adminRoutes);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -16,16 +16,47 @@ block content
                             li.breadcrumb-item.active.text-primary Đặt vé xem phim
     section
         .container
-            .row
-                .col-md-6
-                    img.img-fluid(src='/images/movie-tickets.svg' alt='movie ticket icon')
-                .col-md-6.align-self-center.text-center.mt-5.mt-md-0
-                    h2.text-success.mb-4 Đặt vé thành công
+            .row.justify-content-between
+                .col-12.text-center.mb-5
+                    h2.text-success.mb-3.text-uppercase Đặt vé thành công
                     .text-success
-                        i.fa.fa-check-circle.fa-5x(aria-hidden='true')
+                        i.fa.fa-check-circle.fa-4x(aria-hidden='true')
                     p.mt-4
-                        | Cảm ơn bạn đã đặt vé tại rạp phim Galaxy Cinema của chúng tôi. Chúc
-                        | bạn có một buổi xem phim vui vẻ. Đây là mã vé của bạn:
-                    p.text-danger.mb-4= id
-                    a.btn.btn-primary.mt-2.mr-3(href='/user') Xem vé đã đặt
-                    a.btn.btn-primary.mt-2(href='/') Về trang chủ
+                        | Galaxy Cinema chúng tôi xin chân thành cảm ơn quý khách hàng đã tin
+                        | tưởng và sử dụng dịch vụ đặt vé xem phim trên website của chúng tôi.
+                        | Chúc bạn có một buổi xem phim thật thoải mái và vui vẻ. Đây là mã vé
+                        | xem phim của bạn, xin vui lòng lưu lại để xuất trình cho nhân viên
+                        | rạp phim khi cần thiết:
+                    p.text-white.navbar-brand.bg-success.px-3.mb-4= id
+                .col-md-5.align-self-center.mt-5.mt-md-0
+                    img.img-fluid(src='/images/movie-tickets.svg' alt='movie ticket icon')
+                .col-md-6.mt-5.mt-md-0
+                    h4.text-center Thông tin vé
+                    table.table.table-borderless.mt-4
+                        thead.d-block
+                            tr.d-block.float-left
+                                th.d-block Tên phim:
+                                th.d-block Ngày chiếu:
+                                th.d-block Giờ chiếu:
+                                th.d-block Ghế ngồi:
+                                th.d-block Họ & tên:
+                                th.d-block Số điện thoại:
+                                th.d-block CMND:
+                                th.d-block Địa chỉ:
+                                th.d-block Thành phố:
+                                th.d-block.text-primary Tổng tiền:
+                        tbody.d-block
+                            tr.d-block.float-left
+                                td.d-block= ticket.movieName
+                                td.d-block= ticket.showtimeDate
+                                td.d-block= ticket.showtimeTime
+                                td.d-block= JSON.parse(ticket.seat)
+                                td.d-block= ticket.name
+                                td.d-block= ticket.phoneNum
+                                td.d-block= ticket.cmnd
+                                td.d-block= ticket.address
+                                td.d-block= ticket.city
+                                td.d-block= ticket.total
+                    .text-center
+                        a.btn.btn-primary.mt-2.mr-5(href='/user') Xem vé đã đặt
+                        a.btn.btn-primary.mt-2(href='/') Về trang chủ

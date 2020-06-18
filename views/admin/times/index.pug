@@ -1,0 +1,50 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Bảng điều khiển
+                                li.breadcrumb-item.active.text-primary Quản lý vé
+    section
+        .container
+            if movies
+                .row.justify-content-center.align-items-center.mb-4
+                    .col-md-6
+                        form(method="POST")
+                            .row.justify-content-center
+                                .col-12
+                                    .form-group
+                                        label.text-primary(for='movieID') Chọn phim
+                                        select.form-control(name='movieID')
+                                            each movie in movies
+                                                option(value= movie.id)= movie.name
+                                button.btn.btn-primary.mt-2 Xem lịch
+            else
+                .row.justify-content-center.align-items-center.mb-4
+                    a.btn-create(href="/admin/times/create/" + movie.id)
+                        i.fa.fa-plus-circle.fa-lg
+                        span &nbsp Thêm ngày chiếu
+                table.table.table-hover
+                    thead
+                        tr.bg-primary.text-white
+                            th.p-3 Ngày chiếu
+                            th.p-3 Giờ chiếu
+                            th.p-3 Thao tác
+                    tbody
+                        each time, index in movie.showtime
+                            tr
+                                td.p-3= index
+                                td.p-3= Object.keys(time)
+                                td.p-3
+                                    a.border.p-1.hover-warning(href="/admin/times/update/" + movie.id + "?showtimeDate=" + index) Cập nhật
+                                    | &nbsp
+                                    a.border.p-1.hover-warning(href="/admin/times/delete/" + movie.id + "?showtimeDate=" + index) Xoá

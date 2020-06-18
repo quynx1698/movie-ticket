@@ -28,4 +28,18 @@ router.post("/tickets/update/:id", controller.postTicketsUpdate);
 
 router.get("/tickets/delete/:id", controller.ticketsDelete);
 
+router.get("/times", controller.times);
+
+router.post("/times", controller.postTimes);
+
+router.get("/times/create/:id", controller.timesCreate);
+
+router.post("/times/create/:id", controller.postTimesCreate);
+
+router.get("/times/update/:id", controller.timesUpdate);
+
+router.post("/times/update/:id", controller.postTimesUpdate);
+
+router.get("/times/delete/:id", controller.timesDelete);
+
 module.exports = router;

@@ -1,0 +1,33 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Quản lý lịch chiếu
+                                li.breadcrumb-item.active.text-primary Thêm ngày chiếu
+    section
+        .container
+            .row.justify-content-center
+                .col-md-9
+                    form(method="POST").row.justify-content-center
+                        .col-12
+                            .form-group
+                                label(for='showtimeDate') Ngày chiếu
+                                input.form-control(type='text' name='showtimeDate' placeholder='Nhập ngày chiếu' value= date disabled)
+                        .col-12
+                            .form-group
+                                label(for='showtimeTime') 
+                                    | Giờ chiếu 
+                                    span.text-muted (Có thể nhập nhiều giờ. VD: 9:30,11:30,12:30,15:00)
+                                input.form-control(type='text' name='showtimeTime' placeholder='Nhập giờ chiếu' value= times)
+                        .col-auto
+                            button.btn.btn-primary.btn-block.mt-4 Thêm ngày chiếu

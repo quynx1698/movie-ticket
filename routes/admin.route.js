@@ -42,4 +42,8 @@ router.post("/times/update/:id", controller.postTimesUpdate);
 
 router.get("/times/delete/:id", controller.timesDelete);
 
+router.get('/seats', controller.seats)
+
+router.post('/seats', controller.postSeats)
+
 module.exports = router;

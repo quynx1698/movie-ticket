@@ -242,3 +242,57 @@ module.exports.timesDelete = async (req, res) => {
   await Movie.findByIdAndUpdate(id, { showtime: movie.showtime });
   res.redirect("/admin/times");
 };
+
+module.exports.seats = async (req, res) => {
+  let movies = await Movie.find();
+
+  if (req.query.movieID) {
+    let id = req.query.movieID;
+    let movie = await Movie.findById(id);
+
+    let showtimeDate = Object.keys(movie.showtime);
+    let showtimeTime = {};
+    for (day of showtimeDate) {
+      showtimeTime[day] = Object.keys(movie.showtime[day]);
+    }
+    res.locals.movie = movie;
+    res.locals.showtimeDate = showtimeDate;
+    res.locals.showtimeTime = showtimeTime;
+  }
+
+  res.render("admin/seats/index", {
+    movies: movies,
+  });
+};
+
+module.exports.postSeats = async (req, res) => {
+  let id = req.query.movieID;
+  let movie = await Movie.findById(id);
+
+  let minSeats = req.body.seat;
+  let showtimeTime = req.body.showtimeTime;
+  let showtimeDate = req.body.showtimeDate;
+
+  let seat = {
+    A: postSeatList(12, "A", minSeats),
+    B: postSeatList(12, "B", minSeats),
+    C: postSeatList(12, "C", minSeats),
+    D: postSeatList(12, "D", minSeats),
+    E: postSeatList(10, "E", minSeats),
+    F: postSeatList(8, "F", minSeats),
+  };
+  movie.showtime[showtimeDate][showtimeTime] = seat;
+
+  await Movie.findByIdAndUpdate(id, { showtime: movie.showtime });
+  res.redirect("/admin/seats");
+};
+
+function postSeatList(index, line, minSeats) {
+  let seatArr = minSeats.filter((x) => x.includes(line));
+  let arr = [];
+  for (let i = 0; i < index; i++) {
+    if (seatArr.includes(line + i)) arr.push(false);
+    else arr.push(true);
+  }
+  return arr;
+}

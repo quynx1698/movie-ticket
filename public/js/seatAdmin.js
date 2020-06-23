@@ -18,7 +18,7 @@ function changeTime(movie) {
       else
         return `<label class="seat"><input type="checkbox" name="seat" value="${
           seatLine[i] + index
-        }" disabled /><span class="checkmark"></span></label>`;
+        }" checked /><span class="checkmark"></span></label>`;
     });
 
     if (i == 0) seatType = h5("Ghế thường");

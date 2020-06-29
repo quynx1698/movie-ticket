@@ -14,7 +14,7 @@ header.site-header
     .container
       .row
         .col.d-flex.align-items-center.justify-content-between
-          a.navbar-brand.text-dark.h2.mb-0(href='/')
+          a.navbar-brand.text-dark.h2.mb-0(href='/admin')
             img(src='/images/logo.png' width='300' alt='logo')
           nav.navbar.navbar-expand-lg.navbar-light.ml-auto
             button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-expanded='false' aria-label='Toggle navigation')
@@ -22,16 +22,19 @@ header.site-header
             #navbarNav.collapse.navbar-collapse
               ul.navbar-nav
                 li.nav-item
-                  a.nav-link(href='#') Trang chủ
+                  a.nav-link(href='/admin') Trang chủ
                 li.nav-item
-                  a.nav-link.active(href='#') Quản lý phim
+                  //- a.nav-link.active(href='#') Quản lý phim
+                  a.nav-link(href='/admin/movies') Quản lý phim
                 li.nav-item
-                  a.nav-link(href='#') Quản lý vé
+                  a.nav-link(href='/admin/times') Quản lý lịch chiếu
                 li.nav-item
-                  a.nav-link(href='/user') Quản lý ghế
-          a#login-btn.btn.btn-primary.ml-5.d-none.d-lg-block(href='#')
-            | Đăng nhập &nbsp
-            i.fa.fa-sign-in(aria-hidden='true')
+                  a.nav-link(href='/admin/seats') Quản lý ghế
+                li.nav-item
+                  a.nav-link(href='/admin/tickets') Quản lý vé
+          //- a#login-btn.btn.btn-primary.ml-5.d-none.d-lg-block(href='#')
+          //-   | Đăng nhập &nbsp
+          //-   i.fa.fa-sign-in(aria-hidden='true')
 block content
 // Optional JavaScript
 script(src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js')

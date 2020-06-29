@@ -16,15 +16,16 @@ block content
                             li.breadcrumb-item.active.text-primary Phim đang chiếu
     section.page-content
         .container
-            .row
-                .col-md-12.col-lg-9.order-lg-1
+            .row.justify-content-center
+                //- .col-md-12.col-lg-9.order-lg-1
+                .col-12
                     .row.row-cols-1.row-cols-md-2.row-cols-lg-3
                         each movie in movies
                             .col.mb-5
                                 .movie-item
                                     .movie-img.hover-translate
-                                        a(href='/movies/view/' + movie.id)
-                                            img.img-fluid.rounded(src=movie.thumbnail alt=movie.name)
+                                        a(href='/movies/' + movie.id)
+                                            img.img-fluid.rounded.w-100(src=movie.thumbnail alt=movie.name)
                                     .movie-desc
                                         a.movie-name.mt-4.mb-2.d-block.link-title(href='/movies/' + movie.id)= movie.name
                                         p.movie-genre.text-muted= movie.genre
@@ -45,5 +46,27 @@ block content
                                 li.page-item.ml-2
                                     a.page-link.rounded-circle.text-dark.bg-transparent(href='/movies?page=' + (current + 1))
                                         i.fa.fa-chevron-right
-                .col-md-12.col-lg-3
-                    a(href="/movies/create") Thêm phim
+                //- .col-md-12.col-lg-3
+                //-     form(method="get").row.justify-content-center.mb-3
+                //-         .col-12
+                //-             label(for='movieName').mb-3 Tìm theo tên
+                //-         .col-12
+                //-             .form-group.d-flex
+                //-                 input.form-control(type='search' name='movieName' placeholder='Nhập tên phim' value="")
+                //-                 button.btn.btn-primary
+                //-                     i.fa.fa-search
+                //-     form(method="get").row.justify-content-center
+                //-         .col-12
+                //-             label(for='movieGenre').mb-3 Tìm theo thể loại
+                //-         .col-12
+                //-             .form-group
+                //-                 .form-check
+                //-                     input#exampleRadios1.form-check-input(type='radio' name='movieGenre' value='option1' checked='')
+                //-                     label.form-check-label(for='exampleRadios1')
+                //-                         | Default radio
+                //-                 .form-check
+                //-                     input#exampleRadios2.form-check-input(type='radio' name='movieGenre' value='option2')
+                //-                     label.form-check-label(for='exampleRadios2')
+                //-                         | Second default radio                  
+                //-         button.btn.btn-primary
+                //-             i.fa.fa-search

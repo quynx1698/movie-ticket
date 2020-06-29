@@ -13,7 +13,7 @@ block content
                         | hân hạnh chào đón bạn!
                     p.lead.text-muted
                         | Rạp phim chúng tôi luôn sẵn sàng mang đến cho bạn những phút giây thư giãn và thoải mái nhất với khẩu hiệu của mình: "Galaxy Cinema - Mang Hollywood đến gần bạn".
-                    a.btn.btn-primary.shadow.mr-2(href='#')
+                    a.btn.btn-primary.shadow.mr-2(href='#about-us')
                         | Về chúng tôi
                     a.btn.btn-outline-primary(href='/movies')
                         | Danh sách phim
@@ -90,7 +90,7 @@ block content
                                     span.display-4
                                         sup.font-size-normal trên 
                                         | 100k                        
-    section
+    section#about-us
         .container
             .row.align-items-center.justify-content-between
                 .col-lg-6.mb-5.mb-lg-0.order-lg-1
@@ -109,8 +109,8 @@ block content
                             | Là một trong những công ty đầu tiên về điện ảnh, được thành lập từ năm 2003. Tự hào là 1 trong 10 địa điểm vui chơi giải trí được yêu thích nhất.
                         p.mb-0
                             | Hệ thống rạp chiếu phim hiện đại, thu hút hàng triệu lượt người đến xem, cũng như chất lượng dịch vụ luôn đặt lên hàng đầu.
-                    a.btn.btn-outline-primary.mt-3(href='#')
-                        | Đọc thêm
+                    //- a.btn.btn-outline-primary.mt-3(href='#')
+                    //-     | Đọc thêm
     section
         .container
             .row.align-items-end.mb-5
@@ -127,7 +127,7 @@ block content
                 .col-lg-3
                     #mytab.nav.flex-column.nav-pills.text-center
                         a#ongoing-tab.nav-link.active.py-3.mb-1.nav-0(data-toggle='pill' href='#ongoing') Phim đang chiếu
-                        a#airing-tab.nav-link.py-3.mb-5.mb-lg-0.nav-0(data-toggle='pill' href='#airing') Phim sắp chiếu
+                        //- a#airing-tab.nav-link.py-3.mb-5.mb-lg-0.nav-0(data-toggle='pill' href='#airing') Phim sắp chiếu
                 .col-lg-9
                     #mytabContent.tab-content
                         #ongoing.tab-pane.fade.show.active
@@ -154,7 +154,7 @@ block content
                                                 p.movie-genre.text-muted= movie.genre
                     .more-movie
                         a.btn.btn-outline-primary.float-right(href="/movies") Xem thêm
-    section.pt-2
+    section.pt-2#price-tag
         .container
             .row.align-items-end.mb-5
                 .col-md-6.col-lg-5.mb-5.mb-md-0

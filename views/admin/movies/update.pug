@@ -26,9 +26,10 @@ block content
                                         label.d-block(for='thumbnail') Hình ảnh phim
                                         input#thumbnail.d-block.mx-auto.py-3.text-muted(type="file" name="thumbnail" accept="image/*" required)
                                         img#output.img-fluid(src= movie.thumbnail)
-                                    .form-group.mt-4.mb-5
-                                        label(for='name') Tên phim
-                                        input.form-control(type='text' name='name' placeholder='Nhập tên phim' value= movie.name)
+                        .col
+                            .form-group
+                                label(for='name') Tên phim
+                                input.form-control(type='text' name='name' placeholder='Nhập tên phim' value= movie.name)
                         .col
                             .form-group
                                 label(for='genre') Thể loại
@@ -45,6 +46,10 @@ block content
                             .form-group
                                 label(for='actor') Diễn viên
                                 input.form-control(type='text' name='actor' placeholder='Nhập diễn viên' value= movie.actor)
+                        .col
+                            .form-group
+                                label(for='director') Đạo diễn
+                                input.form-control(type='text' name='director' placeholder='Nhập đạo diễn' value= movie.actor)
                         .col
                             .form-group
                                 label(for='release') Ngày phát hành

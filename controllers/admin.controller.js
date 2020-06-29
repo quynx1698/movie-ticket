@@ -19,9 +19,7 @@ module.exports.moviesCreate = (req, res) => res.render("admin/movies/create");
 
 module.exports.postMoviesCreate = async (req, res) => {
   const file = req.files.thumbnail;
-  thumbnail = await cloudinary.uploader.upload(file.tempFilePath, {
-    public_id: "movie_thumb",
-  });
+  thumbnail = await cloudinary.uploader.upload(file.tempFilePath);
   req.body.thumbnail = thumbnail.url;
   const newMovie = new Movie(req.body);
 
@@ -174,6 +172,9 @@ module.exports.postTimesCreate = async (req, res) => {
 
   let times = req.body.showtimeTime.split(",");
   let date = req.body.showtimeDate;
+  if (!movie.showtime) {
+    movie.showtime = {};
+  }
   movie.showtime[date] = {};
   for (time of times) {
     movie.showtime[date][time] = seat;
@@ -186,7 +187,7 @@ module.exports.postTimesCreate = async (req, res) => {
 function seatList(index) {
   let arr = [];
   for (let i = 0; i < index; i++) {
-    arr.push(false);
+    arr.push(true);
   }
   return arr;
 }

@@ -33,18 +33,21 @@ block content
                     a.btn-create(href="/admin/times/create/" + movie.id)
                         i.fa.fa-plus-circle.fa-lg
                         span &nbsp Thêm ngày chiếu
-                table.table.table-hover
-                    thead
-                        tr.bg-primary.text-white
-                            th.p-3 Ngày chiếu
-                            th.p-3 Giờ chiếu
-                            th.p-3 Thao tác
-                    tbody
-                        each time, index in movie.showtime
-                            tr
-                                td.p-3= index
-                                td.p-3= Object.keys(time)
-                                td.p-3
-                                    a.border.p-1.hover-warning(href="/admin/times/update/" + movie.id + "?showtimeDate=" + index) Cập nhật
-                                    | &nbsp
-                                    a.border.p-1.hover-warning(href="/admin/times/delete/" + movie.id + "?showtimeDate=" + index) Xoá
+                if movie.showtime
+                    table.table.table-hover
+                        thead
+                            tr.bg-primary.text-white
+                                th.p-3 Ngày chiếu
+                                th.p-3 Giờ chiếu
+                                th.p-3 Thao tác
+                        tbody
+                            each time, index in movie.showtime
+                                tr
+                                    td.p-3= index
+                                    td.p-3= Object.keys(time)
+                                    td.p-3
+                                        a.border.p-1.hover-warning(href="/admin/times/update/" + movie.id + "?showtimeDate=" + index) Cập nhật
+                                        | &nbsp
+                                        a.border.p-1.hover-warning(href="/admin/times/delete/" + movie.id + "?showtimeDate=" + index) Xoá
+                else
+                    h4.text-center.mt-5 Phim chưa có lịch chiếu

@@ -45,7 +45,7 @@ module.exports.postCheckout = async (req, res) => {
 
   req.app.locals.isBooked = false;
 
-  await Movie.findByIdAndUpdate(req.body.id, { showtime: movie.showtime });
+  await Movie.findByIdAndUpdate(req.query.id, { showtime: movie.showtime });
 
   res.render("cart/success", {
     id: id,

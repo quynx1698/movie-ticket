@@ -296,3 +296,50 @@ function postSeatList(index, line, minSeats) {
   }
   return arr;
 }
+
+module.exports.accounts = async (req, res) => {
+  let users = await User.find();
+
+  res.render("admin/accounts/index", {
+    users: users,
+  });
+};
+
+module.exports.accountsDetail = async (req, res) => {
+  let id = req.params.id;
+  let user = await User.findById(id);
+
+  res.render("admin/accounts/detail", {
+    user: user,
+  });
+};
+
+module.exports.accountsUpdate = async (req, res) => {
+  let id = req.params.id;
+  let user = await User.findById(id);
+
+  res.render("admin/accounts/update", {
+    user: user,
+  });
+};
+
+module.exports.postAccountsUpdate = async (req, res) => {
+  let id = req.params.id;
+
+  const file = req.files.avt;
+  avt = await cloudinary.uploader.upload(file.tempFilePath, {
+    public_id: "user_avt/" + id,
+  });
+  req.body.thumbnail = avt.url;
+
+  await User.findByIdAndUpdate(id, req.body);
+
+  res.redirect("/admin/users");
+};
+
+module.exports.accountsDelete = async (req, res) => {
+  let id = req.params.id;
+
+  await User.findByIdAndDelete(id);
+  res.redirect("/admin/users");
+};

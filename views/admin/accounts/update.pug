@@ -1,0 +1,85 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Cập nhật thông tin
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Thành viên
+                                li.breadcrumb-item.active.text-primary Cập nhật thông tin
+    section
+        .container
+            .row.justify-content-center
+                .col-md-9
+                    form(method="POST" encType="multipart/form-data").row.row-cols-1.row-cols-md-2.justify-content-center
+                        .col-md-12
+                            .row.justify-content-center
+                                .col-6
+                                    .form-group.text-center
+                                        label.d-block(for='avt') Ảnh đại diện
+                                        input#avt.d-block.mx-auto.py-3(type="file", name="avt")
+                                        img#output.img-fluid
+                                    .form-group.mt-4.mb-5
+                                        label(for='name') Tên hiển thị
+                                        input.form-control(type='text' name='name' placeholder='Nhập tên hiển thị' value= user.name || user.email)
+                        .col
+                            .form-group
+                                label(for='firstname') Họ & tên đệm
+                                input.form-control(type='text' name='firstname' placeholder='Nhập họ' value= user.firstname || "")
+                        .col
+                            .form-group
+                                label(for='lastname') Tên
+                                input.form-control(type='text' name='lastname' placeholder='Nhập tên' value= user.lastname || "")
+                        .col
+                            .form-group
+                                label(for='birthday') Ngày sinh
+                                input.form-control(type='text' name='birthday' placeholder='Nhập ngày sinh'  value= user.birthday || "")
+                        .col
+                            .form-group
+                                label(for='sex') Giới tính
+                                select.form-control(name='sex')
+                                    if user.sex == "male"
+                                        option(value="male" selected="selected") Nam
+                                        option(value="female") Nữ
+                                    else
+                                        option(value="male") Nam
+                                        option(value="female" selected="selected") Nữ
+                        .col
+                            .form-group
+                                label(for='phoneNum') Số điện thoại
+                                input.form-control(type='text' name='phoneNum' placeholder='Nhập số điện thoại' value= user.phoneNum || "")
+                        .col
+                            .form-group
+                                label(for='cmnd') Số CMND
+                                input.form-control(type='text' name='cmnd' placeholder='Nhập số cmnd' value= user.cmnd || "")
+                        .col-md-12
+                            .form-group
+                                label(for='address') Địa chỉ
+                                input.form-control(type='text' name='address' placeholder='Nhập địa chỉ' value= user.address || "")
+                        .col
+                            .form-group
+                                label(for='district') Quận/Huyện
+                                input.form-control(type='text' name='district' placeholder='Nhập quận/huyện' value= user.district || "")
+                        .col
+                            .form-group
+                                label(for='city') Tỉnh/Thành phố
+                                input.form-control(type='text' name='city' placeholder='Nhập tỉnh/thành phố' value= user.city || "")
+                        .col
+                            button.btn.btn-primary.btn-block.mt-5 Cập nhật thông tin
+    script.
+        var avt = document.getElementById('avt');
+        avt.addEventListener('change', function(e) {
+             var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        })
+    

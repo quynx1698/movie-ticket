@@ -42,8 +42,18 @@ router.post("/times/update/:id", controller.postTimesUpdate);
 
 router.get("/times/delete/:id", controller.timesDelete);
 
-router.get('/seats', controller.seats)
+router.get("/seats", controller.seats);
 
-router.post('/seats', controller.postSeats)
+router.post("/seats", controller.postSeats);
+
+router.get("/users", controller.accounts);
+
+router.get("/users/detail/:id", controller.accountsDetail);
+
+router.get("/users/update/:id", controller.accountsUpdate);
+
+router.post("/users/update/:id", controller.postAccountsUpdate);
+
+router.get("/users/delete/:id", controller.accountsDelete);
 
 module.exports = router;

@@ -1,0 +1,37 @@
+extends ../../layouts/adminCommon
+
+block content
+    section.position-relative
+            #particles-js
+                canvas.particles-js-canvas-el(width='1898' height='315' style='width: 100%; height: 100%;')
+            .container
+                .row.text-center
+                    .col
+                        h1 Bảng điều khiển
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb.justify-content-center.bg-transparent.p-0.m-0
+                                li.breadcrumb-item
+                                    a.text-dark(href='#') Trang chủ
+                                li.breadcrumb-item Bảng điều khiển
+                                li.breadcrumb-item.active.text-primary Quản lý phim
+    section
+        .container
+            table.table.table-hover
+                thead
+                    tr.bg-primary.text-white
+                        th.p-3 ID người dùng
+                        th.p-3 Email
+                        th.p-3 Số điện thoại
+                        th.p-3 Thao tác
+                tbody
+                    each user in users
+                        tr
+                            td.p-3= user.id
+                            td.p-3= user.email
+                            td.p-3= user.phoneNum || "Chưa cung cấp"
+                            td.p-3
+                                a.border.p-1.hover-warning(href="/admin/users/detail/" + user.id) Chi tiết
+                                | &nbsp
+                                a.border.p-1.hover-warning(href="/admin/users/update/" + user.id) Cập nhật
+                                | &nbsp
+                                a.border.p-1.hover-warning(href="/admin/users/delete/" + user.id) Xoá

@@ -46,6 +46,6 @@ app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", authMiddleware.requireAuthCart, cartRoutes);
 app.use("/user", authMiddleware.requireAuth, userRoutes);
-app.use("/admin", adminRoutes);
+app.use("/admin", authMiddleware.requireAdmin, adminRoutes);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -31,3 +31,24 @@ module.exports.requireAuthCart = async (req, res, next) => {
 
   next();
 };
+
+module.exports.requireAdmin = async (req, res, next) => {
+  if (!req.signedCookies.userId) {
+    res.redirect("/auth/login?path=/admin");
+    return;
+  }
+
+  let user = await User.findById(req.signedCookies.userId);
+
+  if (!user) {
+    res.redirect("/auth/login?path=/admin");
+    return;
+  }
+
+  if (user.email != "admin@gmail.com" || user.password != "admin") {
+    res.redirect("/auth/login?path=/admin");
+    return;
+  }
+
+  next();
+};

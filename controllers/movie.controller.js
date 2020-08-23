@@ -83,8 +83,10 @@ module.exports.get = async (req, res) => {
   for (let i = 0; i < showtimeDate.length; i++) {
     showtimeTime[showtimeDate[i]] = [];
     for (let time in movie.showtime[showtimeDate[i]]) {
+      let dayArr = showtimeDate[i].split("/");
+      let dateShow = new Date(dayArr[2], dayArr[1] - 1, dayArr[0]);
       let timeArr = time.split(":");
-      if (i == 0) {
+      if (dateShow == nowDate) {
         if (timeArr[0] > now.getHours()) {
           showtimeTime[showtimeDate[i]].push(time);
         }

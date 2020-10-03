@@ -9,10 +9,13 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://admin:admin@movie-ticket-cluster.z7jg7.gcp.mongodb.net/movie-ticket?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const movieRoutes = require("./routes/movie.route");
 const authRoutes = require("./routes/auth.route");
@@ -45,9 +48,9 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/nganluong_b61fbc0de5644ae4736cda7ab27f9c83.html", (req, res) => {
-  res.send("b61fbc0de5644ae4736cda7ab27f9c83");
-});
+// app.get("/nganluong_b61fbc0de5644ae4736cda7ab27f9c83.html", (req, res) => {
+//   res.send("b61fbc0de5644ae4736cda7ab27f9c83");
+// });
 
 app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);

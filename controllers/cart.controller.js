@@ -32,7 +32,7 @@ module.exports.postCheckout = async (req, res) => {
   let order = await Order.findOne({ secure_code: "none" });
 
   let queryUrl = {
-    merchant_site_code: 63933,
+    merchant_site_code: "63933",
     return_url: "https://movie-ticket-express.herokuapp.com/cart/success",
     receiver: "smlie.wolves@gmail.com",
     order_code: order.id,

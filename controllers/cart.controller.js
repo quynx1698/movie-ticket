@@ -1,11 +1,9 @@
 const User = require("../models/user.model");
 const Movie = require("../models/movie.model");
-const Order = require("../models/order.model");
 const generateUniqueId = require("generate-unique-id");
-const md5 = require("md5");
-const url = require("url");
+const { checkoutNganLuong } = require("../nganluong-handlers");
 
-module.exports.checkout = (req, res) => {
+module.exports.checkout = async (req, res) => {
   let seatList = req.query.seat;
   let sum = seatList.reduce((x, y) => {
     if (y.includes("A") || y.includes("B")) y = 155000;
@@ -19,6 +17,7 @@ module.exports.checkout = (req, res) => {
   });
   total = total.slice(1) + total.slice(0, 1);
   req.query.total = total;
+
   res.render("cart/index", {
     ticket: req.query,
   });
@@ -27,44 +26,74 @@ module.exports.checkout = (req, res) => {
 module.exports.postCheckout = async (req, res) => {
   let user = await User.findById(req.signedCookies.userId);
 
-  const newOrder = new Order({ secure_code: "none" });
-  await newOrder.save();
-  let order = await Order.findOne({ secure_code: "none" });
+  const userAgent = req.headers["user-agent"];
+  console.log("userAgent", userAgent);
 
-  let queryUrl = {
-    merchant_site_code: "63933",
-    return_url: "https://movie-ticket-express.herokuapp.com/cart/success",
-    receiver: "smlie.wolves@gmail.com",
-    order_code: order.id,
-    price: 2000,
-    currency: "vnd",
-    quantity: 1,
-    tax: 0,
-    discount: 0,
-    fee_cal: 0,
-    fee_shipping: 0,
+  const params = Object.assign({}, req.body);
+
+  const clientIp =
+    req.headers["x-forwarded-for"] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    (req.connection.socket ? req.connection.socket.remoteAddress : null);
+
+  const amount = 1;
+  const now = new Date();
+
+  // NOTE: only set the common required fields and optional fields from all gateways here, redundant fields will invalidate the payload schema checker
+  const checkoutData = {
+    amount,
+    clientIp: clientIp.length > 15 ? "127.0.0.1" : clientIp,
+    locale: "vn",
+    billingPostCode: params.cmnd || "",
+    deliveryAddress: params.address || "",
+    deliveryCity: params.city || "",
+    deliveryCountry: params.billingCountry || "",
+    currency: "VND",
+    customerEmail: user.email,
+    customerPhone: params.phoneNum,
+    orderId: `node-${now.toISOString()}`,
+    // returnUrl: ,
+    transactionId: `node-${now.toISOString()}`, // same as orderId (we don't have retry mechanism)
+    customerId: user.email,
   };
 
-  let secureStr = "";
-  for (let prop in queryUrl) {
-    secureStr += queryUrl[prop] + " ";
+  // pass checkoutData to gateway middleware via res.locals
+  res.locals.checkoutData = checkoutData;
+
+  // Note: these handler are asynchronous
+  let asyncCheckout = null;
+  switch (params.paymentMethod) {
+    case "nganluong":
+      // this param is not expected in other gateway
+      checkoutData.customerName = params.name;
+      checkoutData.paymentMethod = "ATM_ONLINE";
+      checkoutData.bankCode = "EXB";
+      asyncCheckout = checkoutNganLuong(req, res);
+      break;
+    case "nganluongvisa":
+      // this param is not expected in other gateway
+      checkoutData.customerName = params.name;
+      checkoutData.paymentMethod = "VISA";
+      asyncCheckout = checkoutNganLuong(req, res);
+      break;
+    default:
+      break;
   }
-  secureStr += "8de8a53bffa09e319b7807b6fd9e6e8a";
-  let secureCode = md5(secureStr);
-  queryUrl.secure_code = secureCode;
-  await Order.findByIdAndUpdate(order.id, { secure_code: secureCode });
-  queryUrl.cancel_url = "https://movie-ticket-express.herokuapp.com/cart/fail";
 
-  let nlApi = url.format({
-    protocol: "https",
-    hostname: "nganluong.vn",
-    pathname: "/checkout.php",
-    query: queryUrl,
-  });
-
-  console.log(nlApi);
-
-  res.redirect(nlApi);
+  if (asyncCheckout) {
+    asyncCheckout
+      .then((checkoutUrl) => {
+        res.writeHead(301, { Location: checkoutUrl.href });
+        res.end();
+      })
+      .catch((err) => {
+        res.send(err.message);
+      });
+  } else {
+    res.send("Payment method not found");
+  }
+  // let user = await User.findById(req.signedCookies.userId);
 
   // const id = generateUniqueId();
   // user.cart[id] = req.body;

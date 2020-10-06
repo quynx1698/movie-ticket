@@ -3,10 +3,10 @@ const { NganLuong } = require("vn-payments");
 /* eslint-disable no-param-reassign */
 const TEST_CONFIG = NganLuong.TEST_CONFIG;
 const nganluong = new NganLuong({
-  paymentGateway: TEST_CONFIG.paymentGateway,
-  merchant: "63933",
+  paymentGateway: "https://www.nganluong.vn/checkout.api.nganluong.post.php",
+  merchant: "63945",
   receiverEmail: "smlie.wolves@gmail.com",
-  secureSecret: "8de8a53bffa09e319b7807b6fd9e6e8a",
+  secureSecret: "467e7976f38b8421c94e60006559f819",
 });
 
 module.exports.checkoutNganLuong = (req, res) => {

@@ -70,6 +70,7 @@ module.exports.postCheckout = async (req, res) => {
       checkoutData.paymentMethod = "ATM_ONLINE";
       checkoutData.bankCode = "EXB";
       asyncCheckout = checkoutNganLuong(req, res);
+      debugger;
       break;
     case "nganluongvisa":
       // this param is not expected in other gateway

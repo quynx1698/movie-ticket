@@ -17,19 +17,35 @@ block content
     section
         .container
             .row.justify-content-between
-                .col-12.text-center.mb-5
-                    h2.text-success.mb-3.text-uppercase Đặt vé thành công
-                    .text-success
-                        i.fa.fa-check-circle.fa-4x(aria-hidden='true')
-                    p.mt-4
-                        | Galaxy Cinema chúng tôi xin chân thành cảm ơn quý khách hàng đã tin
-                        | tưởng và sử dụng dịch vụ đặt vé xem phim trên website của chúng tôi.
-                        | Chúc bạn có một buổi xem phim thật thoải mái và vui vẻ. Đây là mã vé
-                        | xem phim của bạn, xin vui lòng lưu lại để xuất trình cho nhân viên
-                        | rạp phim khi cần thiết:
-                    p.text-white.navbar-brand.bg-success.px-3.mb-4= id
-                .col-md-5.align-self-center.mt-5.mt-md-0
-                    img.img-fluid(src='/images/movie-tickets.svg' alt='movie ticket icon')
+                if code == "00"
+                    .col-12.text-center.mb-5
+                        h2.text-success.mb-3.text-uppercase Đặt vé thành công
+                        .text-success
+                            i.fa.fa-check-circle.fa-4x(aria-hidden='true')
+                        p.mt-4
+                            | Galaxy Cinema chúng tôi xin chân thành cảm ơn quý khách hàng đã tin
+                            | tưởng và sử dụng dịch vụ đặt vé xem phim trên website của chúng tôi.
+                            | Chúc bạn có một buổi xem phim thật thoải mái và vui vẻ. Đây là mã vé
+                            | xem phim của bạn, xin vui lòng lưu lại để xuất trình cho nhân viên
+                            | rạp phim khi cần thiết:
+                        p.text-white.navbar-brand.bg-success.px-3.mb-4= id
+                    .col-md-5.align-self-center.mt-5.mt-md-0
+                        img.img-fluid(src='/images/movie-tickets.svg' alt='movie ticket icon')
+                else
+                    .col-12.text-center.mb-5
+                        h2.text-danger.mb-3.text-uppercase Đặt vé thất bại
+                        .text-danger
+                            i.fa.fa-times-circle.fa-4x(aria-hidden='true')
+                        p.mt-4
+                            | Thanh toán không thành công hoặc đã bị huỷ. Quý khách vui lòng kiểm
+                            | tra lại thông tin thanh toán và thử lại lần nữa. Nếu vẫn không thực
+                            | hiện được, quý khách vui lòng liên hệ tới số Hotline: (036) 801 7752
+                            | để được nhân viên chúng tôi hỗ trợ và tư vấn. Bên dưới là mã đơn hàng
+                            | của quý khách, quý khách vui lòng báo cho nhân viên mã này để được hỗ
+                            | trợ nhanh chóng và tốt nhất. Xin chân thành cảm ơn!
+                        p.text-white.navbar-brand.bg-danger.px-3.mb-4= id
+                    .col-md-5.align-self-center.mt-5.mt-md-0
+                        img.img-fluid(src='/images/movie-tickets-err.svg' alt='movie ticket icon')
                 .col-md-6.mt-5.mt-md-0
                     h4.text-center Thông tin vé
                     table.table.table-borderless.mt-4

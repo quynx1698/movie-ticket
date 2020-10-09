@@ -43,13 +43,38 @@ block content
                                 .form-group
                                     label(for='address') Địa chỉ
                                     textarea.form-control(rows="3" name='address' placeholder='Nhập địa chỉ')
-                            .col-md-12
+                            .col
                                 label(for='city') Thành phố
                                 input#zip.form-control(type='text' name='city' placeholder='Thành phố')
-                            .col-md-12
+                            .col
                                 .form-group
-                                    label(for='paymentMethod') Địa chỉ
-                                    input#paymentMethod(type="radio", name="paymentMethod" value="nganluong")
+                                    label(for='bankCode') Ngân hàng
+                                    select.form-control#bankCode(name='bankCode')
+                                        option(value='') Không chọn
+                                        option(value='VNPAYQR') Ngân hàng VNPAYQR
+                                        option(value='NCB') Ngân hàng NCB
+                                        option(value='SCB') Ngân hàng SCB
+                                        option(value='SACOMBANK') Ngân hàng SACOMBANK
+                                        option(value='EXIMBANK') Ngân hàng EXIMBANK
+                                        option(value='MSBANK') Ngân hàng MSBANK
+                                        option(value='NAMABANK') Ngân hàng NAMABANK
+                                        option(value='VISA') Ngân hàng VISA
+                                        option(value='VNMART') Ngân hàng VNMART
+                                        option(value='VIETINBANK') Ngân hàng VIETINBANK
+                                        option(value='VIETCOMBANK') Ngân hàng VIETCOMBANK
+                                        option(value='HDBANK') Ngân hàng HDBANK
+                                        option(value='DONGABANK') Ngân hàng Dong A
+                                        option(value='TPBANK') Ngân hàng Tp Bank
+                                        option(value='OJB') Ngân hàng OceanBank
+                                        option(value='BIDV') Ngân hàng BIDV
+                                        option(value='TECHCOMBANK') Ngân hàng Techcombank
+                                        option(value='VPBANK') Ngân hàng VPBank
+                                        option(value='AGRIBANK') Ngân hàng AGRIBANK
+                                        option(value='MBBANK') Ngân hàng MBBank
+                                        option(value='ACB') Ngân hàng ACB
+                                        option(value='OCB') Ngân hàng OCB
+                                        option(value='SHB') Ngân hàng SHB
+                                        option(value='IVB') Ngân hàng IVB
                 .col-lg-5.mt-5.mt-lg-0.align-self-end
                     .p-3.p-lg-5.border
                         h3.mb-3 Thông tin vé

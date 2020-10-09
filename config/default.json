@@ -1,0 +1,6 @@
+{
+  "vnp_TmnCode": "ROA6WZ4G",
+  "vnp_HashSecret": "IJHAOOKTQFJMTQAWMEJLBTOTOQNGNIDG",
+  "vnp_Url": "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+  "vnp_ReturnUrl": "https://movie-ticket-express.herokuapp.com/cart/vnpay_return"
+}

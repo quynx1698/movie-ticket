@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const Movie = require("../models/movie.model");
 const generateUniqueId = require("generate-unique-id");
-const { checkoutNganLuong } = require("../nganluong-handlers");
+const Order = require("../models/order.model");
 
 module.exports.checkout = async (req, res) => {
   let seatList = req.query.seat;
@@ -24,103 +24,180 @@ module.exports.checkout = async (req, res) => {
 };
 
 module.exports.postCheckout = async (req, res) => {
-  let user = await User.findById(req.signedCookies.userId);
+  const newOrder = new Order(req.body);
+  let data = await newOrder.save();
+  let dataId = data.id;
+  let total = req.body.total;
+  total = total.slice(0, -1).split(",").join("");
 
-  const userAgent = req.headers["user-agent"];
-  console.log("userAgent", userAgent);
-
-  const params = Object.assign({}, req.body);
-
-  const clientIp =
+  var ipAddr =
     req.headers["x-forwarded-for"] ||
     req.connection.remoteAddress ||
     req.socket.remoteAddress ||
-    (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    req.connection.socket.remoteAddress;
 
-  const amount = 1;
-  const now = new Date();
+  var config = require("config");
+  var dateFormat = require("dateformat");
 
-  // NOTE: only set the common required fields and optional fields from all gateways here, redundant fields will invalidate the payload schema checker
-  const checkoutData = {
-    amount,
-    clientIp: clientIp.length > 15 ? "127.0.0.1" : clientIp,
-    locale: "vn",
-    billingPostCode: params.cmnd || "",
-    deliveryAddress: params.address || "",
-    deliveryCity: params.city || "",
-    deliveryCountry: params.billingCountry || "",
-    currency: "VND",
-    customerEmail: user.email,
-    customerPhone: params.phoneNum,
-    orderId: `node-${now.toISOString()}`,
-    // returnUrl: ,
-    transactionId: `node-${now.toISOString()}`, // same as orderId (we don't have retry mechanism)
-    customerId: user.email,
-  };
+  var tmnCode = config.get("vnp_TmnCode");
+  var secretKey = config.get("vnp_HashSecret");
+  var vnpUrl = config.get("vnp_Url");
+  var returnUrl = config.get("vnp_ReturnUrl");
 
-  // pass checkoutData to gateway middleware via res.locals
-  res.locals.checkoutData = checkoutData;
+  var date = new Date();
 
-  // Note: these handler are asynchronous
-  let asyncCheckout = null;
-  switch (params.paymentMethod) {
-    case "nganluong":
-      // this param is not expected in other gateway
-      checkoutData.customerName = params.name;
-      checkoutData.paymentMethod = "ATM_ONLINE";
-      checkoutData.bankCode = "EXB";
-      asyncCheckout = checkoutNganLuong(req, res);
-      debugger;
-      break;
-    case "nganluongvisa":
-      // this param is not expected in other gateway
-      checkoutData.customerName = params.name;
-      checkoutData.paymentMethod = "VISA";
-      asyncCheckout = checkoutNganLuong(req, res);
-      break;
-    default:
-      break;
+  var createDate = dateFormat(date, "yyyymmddHHmmss");
+  var orderId = dateFormat(date, "HHmmss");
+  var amount = total;
+  var bankCode = req.body.bankCode;
+
+  var orderInfo = dataId;
+  var orderType = "billpayment";
+  var locale = "vn";
+  if (locale === null || locale === "") {
+    locale = "vn";
+  }
+  var currCode = "VND";
+  var vnp_Params = {};
+  vnp_Params["vnp_Version"] = "2";
+  vnp_Params["vnp_Command"] = "pay";
+  vnp_Params["vnp_TmnCode"] = tmnCode;
+  // vnp_Params['vnp_Merchant'] = ''
+  vnp_Params["vnp_Locale"] = locale;
+  vnp_Params["vnp_CurrCode"] = currCode;
+  vnp_Params["vnp_TxnRef"] = orderId;
+  vnp_Params["vnp_OrderInfo"] = orderInfo;
+  vnp_Params["vnp_OrderType"] = orderType;
+  vnp_Params["vnp_Amount"] = amount * 100;
+  vnp_Params["vnp_ReturnUrl"] = returnUrl;
+  vnp_Params["vnp_IpAddr"] = ipAddr;
+  vnp_Params["vnp_CreateDate"] = createDate;
+  if (bankCode !== null && bankCode !== "") {
+    vnp_Params["vnp_BankCode"] = bankCode;
   }
 
-  if (asyncCheckout) {
-    asyncCheckout
-      .then((checkoutUrl) => {
-        res.writeHead(301, { Location: checkoutUrl.href });
-        res.end();
-      })
-      .catch((err) => {
-        res.send(err.message);
-      });
-  } else {
-    res.send("Payment method not found");
-  }
-  // let user = await User.findById(req.signedCookies.userId);
+  vnp_Params = sortObject(vnp_Params);
 
-  // const id = generateUniqueId();
-  // user.cart[id] = req.body;
-  // await User.findByIdAndUpdate(req.signedCookies.userId, { cart: user.cart });
+  var querystring = require("qs");
+  var signData =
+    secretKey + querystring.stringify(vnp_Params, { encode: false });
 
-  // let movie = await Movie.findById(req.body.movieID);
+  var sha256 = require("sha256");
 
-  // let date = req.body.showtimeDate;
-  // let time = req.body.showtimeTime;
-  // for (const seat of JSON.parse(req.body.seat)) {
-  //   let seatLine = seat.slice(0, 1);
-  //   let seatIndex = seat.slice(1);
-  //   if (!movie.showtime[date][time][seatLine][seatIndex]) {
-  //     req.app.locals.isBooked = true;
-  //     res.redirect(req.app.locals.path);
-  //     return;
-  //   }
-  //   movie.showtime[date][time][seatLine][seatIndex] = false;
-  // }
+  var secureHash = sha256(signData);
 
-  // req.app.locals.isBooked = false;
+  vnp_Params["vnp_SecureHashType"] = "SHA256";
+  vnp_Params["vnp_SecureHash"] = secureHash;
+  vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: true });
 
-  // await Movie.findByIdAndUpdate(req.query.id, { showtime: movie.showtime });
-
-  // res.render("cart/success", {
-  //   id: id,
-  //   ticket: req.body,
-  // });
+  //Neu muon dung Redirect thi dong dong ben duoi
+  // res.status(200).json({ code: "00", data: vnpUrl });
+  //Neu muon dung Redirect thi mo dong ben duoi va dong dong ben tren
+  res.redirect(vnpUrl);
 };
+
+module.exports.vnpReturn = async (req, res) => {
+  let user = await User.findById(req.signedCookies.userId);
+
+  var vnp_Params = req.query;
+
+  let order = await Order.findById(vnp_Params["vnp_OrderInfo"]);
+
+  var secureHash = vnp_Params["vnp_SecureHash"];
+
+  delete vnp_Params["vnp_SecureHash"];
+  delete vnp_Params["vnp_SecureHashType"];
+
+  vnp_Params = sortObject(vnp_Params);
+
+  var config = require("config");
+  var tmnCode = config.get("vnp_TmnCode");
+  var secretKey = config.get("vnp_HashSecret");
+
+  var querystring = require("qs");
+  var signData =
+    secretKey + querystring.stringify(vnp_Params, { encode: false });
+
+  var sha256 = require("sha256");
+
+  var checkSum = sha256(signData);
+
+  if (secureHash === checkSum) {
+    //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
+    if (vnp_Params["vnp_ResponseCode"] == "00") {
+      user.cart[order.id] = order;
+      await User.findByIdAndUpdate(req.signedCookies.userId, {
+        cart: user.cart,
+      });
+      let movie = await Movie.findById(order.movieID);
+      let date = order.showtimeDate;
+      let time = order.showtimeTime;
+      for (const seat of JSON.parse(order.seat)) {
+        let seatLine = seat.slice(0, 1);
+        let seatIndex = seat.slice(1);
+        if (!movie.showtime[date][time][seatLine][seatIndex]) {
+          req.app.locals.isBooked = true;
+          res.redirect(req.app.locals.path);
+          return;
+        }
+        movie.showtime[date][time][seatLine][seatIndex] = false;
+      }
+      req.app.locals.isBooked = false;
+      await Movie.findByIdAndUpdate(movie.id, { showtime: movie.showtime });
+    }
+    res.render("cart/success", {
+      code: vnp_Params["vnp_ResponseCode"],
+      id: order.id,
+      ticket: order,
+    });
+  } else {
+    res.render("cart/success", { code: "97", id: order.id, ticket: order });
+  }
+};
+
+module.exports.vnpIpn = (req, res) => {
+  var vnp_Params = req.query;
+  var secureHash = vnp_Params["vnp_SecureHash"];
+
+  delete vnp_Params["vnp_SecureHash"];
+  delete vnp_Params["vnp_SecureHashType"];
+
+  vnp_Params = sortObject(vnp_Params);
+  var config = require("config");
+  var secretKey = config.get("vnp_HashSecret");
+  var querystring = require("qs");
+  var signData =
+    secretKey + querystring.stringify(vnp_Params, { encode: false });
+
+  var sha256 = require("sha256");
+
+  var checkSum = sha256(signData);
+
+  if (secureHash === checkSum) {
+    var orderId = vnp_Params["vnp_TxnRef"];
+    var rspCode = vnp_Params["vnp_ResponseCode"];
+    //Kiem tra du lieu co hop le khong, cap nhat trang thai don hang va gui ket qua cho VNPAY theo dinh dang duoi
+    res.status(200).json({ RspCode: "00", Message: "success" });
+  } else {
+    res.status(200).json({ RspCode: "97", Message: "Fail checksum" });
+  }
+};
+
+function sortObject(o) {
+  var sorted = {},
+    key,
+    a = [];
+
+  for (key in o) {
+    if (o.hasOwnProperty(key)) {
+      a.push(key);
+    }
+  }
+
+  a.sort();
+
+  for (key = 0; key < a.length; key++) {
+    sorted[a[key]] = o[a[key]];
+  }
+  return sorted;
+}

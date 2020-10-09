@@ -48,14 +48,6 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/nganluong_b61fbc0de5644ae4736cda7ab27f9c83.html", (req, res) => {
-  res.send("b61fbc0de5644ae4736cda7ab27f9c83");
-});
-
-app.get("/baokim35facb657242d20ed8075da512b86e86.txt", (req, res) => {
-  res.send("35facb657242d20ed8075da512b86e86");
-});
-
 app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", authMiddleware.requireAuthCart, cartRoutes);

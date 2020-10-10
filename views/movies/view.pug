@@ -61,7 +61,11 @@ block content
                             //- a#nav-tab3.nav-item.nav-link(data-toggle='tab' href='#tab3-3' role='tab' aria-selected='false') Reviews (2)
                     .tab-content.pt-5
                         #tab3-1.tab-pane.fade.show.active(role='tabpanel')
+                            h4.mt-2.mb-5 Sơ lược
                             p.mb-0= movie.description
+                            h4.my-5 Trailer phim
+                            .embed-youtube
+                                iframe.embed-video(src= 'https://www.youtube.com/embed/' + movie.trailer frameborder='0' allowfullscreen='')
                         #tab3-2.tab-pane.fade(role='tabpanel')
                             form(action='/cart' method='GET')
                                 input(type="hidden", name="id", value=movie.id)

@@ -26,10 +26,9 @@ block content
                                         label.d-block(for='thumbnail') Hình ảnh phim
                                         input#thumbnail.d-block.mx-auto.py-3.text-muted(type="file" name="thumbnail" accept="image/*" required)
                                         img#output.img-fluid
-                        .col
-                            .form-group
-                                label(for='name') Tên phim
-                                input.form-control(type='text' name='name' placeholder='Nhập tên phim' value='')
+                                    .form-group
+                                        label(for='name') Tên phim
+                                        input.form-control(type='text' name='name' placeholder='Nhập tên phim' value='')
                         .col
                             .form-group
                                 label(for='genre') Thể loại
@@ -66,6 +65,10 @@ block content
                             .form-group
                                 label(for='producer') Nhà sản xuất
                                 input.form-control(type='text' name='producer' placeholder='Nhập nhà sản xuất' value='')
+                        .col
+                            .form-group
+                                label(for='trailer') Mã trailer phim
+                                input.form-control(type='text' name='trailer' placeholder='Nhập mã trailer trên Youtube' value='')
                         .col-md-12
                             .form-group
                                 label(for='description') Nội dung

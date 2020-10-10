@@ -13,6 +13,7 @@ var movieSchema = new mongoose.Schema({
   producer: String,
   description: String,
   thumbnail: String,
+  trailer: String,
   showtime: Object,
 });
 

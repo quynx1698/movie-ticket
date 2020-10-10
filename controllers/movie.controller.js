@@ -41,27 +41,47 @@ module.exports.index = async (req, res) => {
   });
 };
 
-module.exports.search = (req, res) => {
-  let q = req.query.q;
-  let matchedMovies = movies.filter(
-    (user) => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
-  );
+module.exports.search = async (req, res) => {
+  let page = parseInt(req.query.page) || 1;
+  const perPage = 6;
+
+  let start = (page - 1) * perPage;
+  let end = page * perPage;
+
+  let movieGenre = req.query.movieGenre;
+  let movies;
+  if(movieGenre == "all") {
+    movies = await Movie.find();
+  }
+  else {
+    movies = await Movie.find({ genre: movieGenre });
+  }
+
+  let movieName = normalizeVN(req.query.movieName);
+  let matchedMovies = movies.filter(movie => normalizeVN(movie.name).indexOf(movieName) !== -1)
+  let lastPage = Math.ceil(matchedMovies.length / perPage);
+
+  let pages = [];
+  if (lastPage < 6) {
+    for (let i = 1; i <= lastPage; i++) {
+      pages.push(i);
+    }
+  } else {
+    if (page < 3) {
+      pages = pageList(3);
+    } else if (page > lastPage - 2) {
+      pages = pageList(lastPage - 2);
+    } else {
+      pages = pageList(page);
+    }
+  }
 
   res.render("movies/index", {
-    movies: matchedMovies,
+    movies: matchedMovies.slice(start, end),
+    current: page,
+    lastPage: lastPage,
+    pages: pages,
   });
-};
-
-module.exports.create = (req, res) => {
-  res.render("movies/create");
-};
-
-module.exports.postCreate = (req, res) => {
-  // req.body.id = shortid.generate();
-  // db.get("movies")
-  //   .push(req.body)
-  //   .write();
-  res.redirect("/movies");
 };
 
 module.exports.get = async (req, res) => {
@@ -108,3 +128,8 @@ module.exports.get = async (req, res) => {
     error: err,
   });
 };
+
+function normalizeVN(str) {
+  let newStr = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D");
+  return newStr.toLowerCase();
+}

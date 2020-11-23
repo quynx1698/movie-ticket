@@ -4,6 +4,8 @@ const generateUniqueId = require("generate-unique-id");
 const Order = require("../models/order.model");
 
 module.exports.checkout = async (req, res) => {
+  let user = await User.findById(req.signedCookies.userId);
+
   let seatList = req.query.seat;
   let sum = seatList.reduce((x, y) => {
     if (y.includes("A") || y.includes("B")) y = 155000;
@@ -20,6 +22,7 @@ module.exports.checkout = async (req, res) => {
 
   res.render("cart/index", {
     ticket: req.query,
+    user: user
   });
 };
 

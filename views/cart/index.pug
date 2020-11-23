@@ -30,22 +30,22 @@ block content
                             .col-md-12
                                 .form-group
                                     label(for='name') Họ và tên
-                                    input.form-control(type='text' name='name' placeholder='Nhập họ tên')
+                                    input.form-control(type='text' name='name' placeholder='Nhập họ tên' value= (user.firstname || "") + " " + (user.lastname || ""))
                             .col
                                 .form-group
                                     label(for='phoneNum') Số điện thoại
-                                    input.form-control(type='tel' name='phoneNum' placeholder='Nhập số điện thoại')
+                                    input.form-control(type='tel' name='phoneNum' placeholder='Nhập số điện thoại' value= user.phoneNum || "")
                             .col
                                 .form-group
                                     label(for='cmnd') Số CMND
-                                    input.form-control(type='number' name='cmnd' placeholder='Nhập số CMND')
+                                    input.form-control(type='number' name='cmnd' placeholder='Nhập số CMND' value= user.cmnd || "")
                             .col-md-12
                                 .form-group
                                     label(for='address') Địa chỉ
-                                    textarea.form-control(rows="3" name='address' placeholder='Nhập địa chỉ')
+                                    textarea.form-control(rows="3" name='address' placeholder='Nhập địa chỉ')= (user.address || "") + " " + (user.district || "")
                             .col
                                 label(for='city') Thành phố
-                                input#zip.form-control(type='text' name='city' placeholder='Thành phố')
+                                input#zip.form-control(type='text' name='city' placeholder='Thành phố' value= user.city || "")
                             .col
                                 .form-group
                                     label(for='bankCode') Ngân hàng
